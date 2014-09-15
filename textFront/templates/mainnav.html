@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block topnav %}
+<div class="pure-menu pure-menu-open pure-menu-horizontal topnav">
+	<ul>
+        {% for menu in menus %}<li><a href="">{{ menu }}</a></li>
+        {% endfor %}
+	</ul>
+</div>
+{% endblock %}
+
