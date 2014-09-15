@@ -1,8 +1,6 @@
 from textFront import app
 from flask import render_template
-from layout import main_layout
-
-#main_layout = {'a thing' :[],'another thing': []}
+from page_controller import main_layout
 
 @app.route('/')
 @app.route('/index')
