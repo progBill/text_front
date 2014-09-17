@@ -7,10 +7,15 @@ from page_controller import main_layout
 def index(menus=main_layout.keys()):
 	return render_template("welcome.html", menus=menus)
 
-
 @app.route('/get_text/<int:text_id>')
 def get_text(text_id):
     text = '\n%s\n' % text_id
     return 'texted: %s' % text
+
+@app.route('/putText')
+def put_text(txt):
+    pass    
+
+
 
 
