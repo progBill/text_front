@@ -10,23 +10,32 @@
 @ltblue: #6DBDDE;
 @fadedblue: #11A4FF;
 
+@max-body-height: 100%;
+
 .bdy{
     background-color: @nice-blue - #111;
 }
 
-
-.leftnav {
-   margin:right; 
+.leftbar {
+    max-height: @max-body-height;
 }
 
+.main-contain{
+    height: 85vh;
+}
 
-
-#txtSubmit {
-    .pure-button;
-    .pure-button-primary;
+.txtDisplay{
+    height: @max-body-height;
+    margin-left: 10px;
+    overflow: auto;
+}
+.task-list{
+    margin-left: 10px;
 }
 
 .topnav{
     margin-bottom: 10px;
 }
+
+
 

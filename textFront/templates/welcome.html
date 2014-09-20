@@ -2,16 +2,18 @@
 {% block headtitle %}<title>Welcome</title>{% endblock %}
 {% block content %}
 <div class="pure-u-1-8" > 
-    <div class="pure-menu pure-menu-open">
-    <ul>
-        <li><a href="#">Stuff</a></li>
-        <li><a href="#">More Stuff</a></li>
-    </ul>
+    <div class="pure-menu pure-menu-open leftbar">
+        <ul>{% for text in texts %}
+            <li><a href="#{{ text.link }}">{{ text.label }}</a></li>{% endfor %}
+        </ul>
     </div>
 </div>
-<div class="pure-u-1-2">
-    <textarea id="txtIn" cols="80" rows="20" placeholder="Please enter big ol text here"></textarea>
-    <a id="txtSubmit"> Submit Text!</a>
-</div>
-{% endblock %}
+<div class="pure-u-1-2"><div class="txtDisplay"></div></div>
+<div class="pure-u-1-8">
+    <div class="pure-menu pure-menu-open task-list">
+        <ul>{% for task in tasks %}
+            <li><a href="#{{ task.name }}">{{ task.name }}</a></li>{% endfor %}
+        </ul>
+    </div>
+</div>{% endblock %}
 
