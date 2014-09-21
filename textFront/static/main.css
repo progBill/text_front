@@ -1139,6 +1139,7 @@ a.pure-button-selected {
   height: 85vh;
 }
 .txtDisplay {
+  background-color: lime;
   height: 100%;
   margin-left: 10px;
   overflow: auto;
