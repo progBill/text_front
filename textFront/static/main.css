@@ -1132,15 +1132,13 @@ a.pure-button-selected {
 .bdy {
   background-color: #4a729c;
 }
-.leftbar {
-  max-height: 100%;
-}
 .main-contain {
   height: 85vh;
 }
+.main-contain div {
+  max-height: 100%;
+}
 .txtDisplay {
-  background-color: lime;
-  height: 100%;
   margin-left: 10px;
   overflow: auto;
 }
