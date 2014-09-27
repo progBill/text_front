@@ -1,4 +1,3 @@
-import matrix 
 from string import punctuation
 
 class Word:

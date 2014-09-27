@@ -1,18 +1,19 @@
 {% extends "mainnav.html" %}
 {% block headtitle %}<title>Welcome</title>{% endblock %}
 {% block content %}
-<div class="pure-u-1-8" > 
-    <div class="pure-menu pure-menu-open leftbar">
-        <ul>{% for text in texts %}
-            <li><a href="#{{ text.link }}">{{ text.label }}</a></li>{% endfor %}
-        </ul>
-    </div>
+<div class="guide-bar"><i></i><p>First choose a text you wish to investigate!</p></div>
+<div class="left-container">
+<div class="pure-menu pure-menu-open leftbar">
+    <ul>{% for text in texts %}
+        <li><a href="#{{ text.link }}">{{ text.label }}</a></li>{% endfor %}
+    </ul>
 </div>
-<div class="pure-u-1-2 txtDisplay"></div>
-<div class="pure-u-1-8">
+</div>
+<div class="txtDisplay"></div>
+<div class="right-container">
     <div class="pure-menu pure-menu-open task-list">
         <ul>{% for task in tasks %}
-            <li><a href="#{{ task.name }}">{{ task.name }}</a></li>{% endfor %}
+            <li class="pure-menu-disabled"><a href="{{ task.name }}">{{ task.name }}</a></li>{% endfor %}
         </ul>
     </div>
 </div>{% endblock %}

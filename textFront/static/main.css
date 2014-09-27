@@ -1132,6 +1132,31 @@ a.pure-button-selected {
 .bdy {
   background-color: #4a729c;
 }
+.guide-bar {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto;
+  width: 100%;
+  background-color: #6c94be;
+  border-bottom: thin solid black;
+  margin-bottom: 10px;
+}
+.right-container,
+.left-container {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto;
+  width: 12.5%;
+  *width: 12.469%;
+}
 .main-contain {
   height: 85vh;
 }
@@ -1139,12 +1164,18 @@ a.pure-button-selected {
   max-height: 100%;
 }
 .txtDisplay {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto;
+  width: 50%;
+  *width: 49.969%;
   margin-left: 10px;
   overflow: auto;
 }
 .task-list {
   margin-left: 10px;
-}
-.topnav {
-  margin-bottom: 10px;
 }

@@ -7,6 +7,7 @@ $( document ).ready(function(){
             .done(function( json ){
                 $txtDisplay.html( json.textbody );
                 $txtDisplay.css('background-color','white');
+                $('.right-container li').removeClass('pure-menu-disabled');
             });
     });
 });

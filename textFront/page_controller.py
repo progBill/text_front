@@ -14,7 +14,7 @@ resources={
 }
 
 # lis of available tasks
-tasks=['Word Distances']
+tasks=['Frequencies', 'Word Distances']
 
 if __name__ == '__main__':
     print main_layout.keys()
