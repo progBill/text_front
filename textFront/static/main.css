@@ -1156,11 +1156,16 @@ a.pure-button-selected {
   text-rendering: auto;
   width: 12.5%;
   *width: 12.469%;
+  margin: 0 10px;
+  text-align: center;
 }
 .main-contain {
   height: 85vh;
+  margin: 0 auto;
+  width: 90%;
 }
 .main-contain div {
+  display: inline-block;
   max-height: 100%;
 }
 .txtDisplay {
@@ -1171,11 +1176,7 @@ a.pure-button-selected {
   word-spacing: normal;
   vertical-align: top;
   text-rendering: auto;
-  width: 50%;
-  *width: 49.969%;
-  margin-left: 10px;
+  width: 66.6667%;
+  *width: 66.6357%;
   overflow: auto;
-}
-.task-list {
-  margin-left: 10px;
 }

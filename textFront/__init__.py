@@ -2,6 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
+app.secret_key = 's\x89$5\x9c\xa6\x8d\x1c\xf0\xc5\xc8a\xb8\x18\xc7\xbf%\xd0\x87\x93\x94\x1e\x9d\x81'
 
 
 import textFront.views
