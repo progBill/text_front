@@ -3,7 +3,8 @@ from nltk.probability import FreqDist
 import nltk
 
 def get_tokens(s):
-    return sorted(set(nltk.word_tokenize(s)))
+    # tokens are defined as space seperated words
+    return sorted([w for w in s.split()])
 
 def lexical_diversity(s):
     # *1.0 to prevent integer division
@@ -17,7 +18,7 @@ def get_word_count(c, w):
     return c[w]
 
 def get_freq_dist(s):
-    fd = FreqDist(w for w in get_tokens(s))
+    fd = FreqDist([x.lower() for x in s.split()])
     return fd.most_common(50)
 
 
