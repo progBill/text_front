@@ -16,37 +16,55 @@
     background-color: @nice-blue - #111;
 }
 
+.brand{
+    position: relative;
+    height: 50px;
+    width: 200px;
+}
+
+.brand-logo{
+    background-color: @fadedblue;
+    position: absolute;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* future proofing */
+}
+
 .guide-bar{
     .pure-u-1;
     background-color: @light-blue;
     border-bottom: thin solid black;
-    margin-bottom: 10px;
+    display: none;
 }
 
 .right-container, .left-container{
     .pure-u-1-8;
-    margin: 0 10px;
     text-align: center;
 }
 
-.main-contain{ 
+.main-contain{
     height: 85vh;
-    margin: 0 auto;
-    width: 90%;
+    margin: 10px auto;
+    width: 75%;
 }
 
-.main-contain div {
+.main-contain div { 
     display: inline-block;
     max-height: @max-body-height;
 }
 
 .txtDisplay{
     .pure-u-16-24;
+    color: @txtcolor;
+    margin: 0 10px;
     overflow: auto;
+
 }
 
-.task-list{
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 6px #555;
+  -webkit-box-shadow: 3px 3px 5px 6px #555;
+  box-shadow:         3px 3px 5px 6px #555;
 }
-
 
 

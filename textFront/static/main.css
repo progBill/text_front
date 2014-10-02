@@ -1132,6 +1132,19 @@ a.pure-button-selected {
 .bdy {
   background-color: #4a729c;
 }
+.brand {
+  position: relative;
+  height: 50px;
+  width: 200px;
+}
+.brand-logo {
+  background-color: #11a4ff;
+  position: absolute;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  /* future proofing */
+}
 .guide-bar {
   display: inline-block;
   *display: inline;
@@ -1143,7 +1156,7 @@ a.pure-button-selected {
   width: 100%;
   background-color: #6c94be;
   border-bottom: thin solid black;
-  margin-bottom: 10px;
+  display: none;
 }
 .right-container,
 .left-container {
@@ -1156,13 +1169,12 @@ a.pure-button-selected {
   text-rendering: auto;
   width: 12.5%;
   *width: 12.469%;
-  margin: 0 10px;
   text-align: center;
 }
 .main-contain {
   height: 85vh;
-  margin: 0 auto;
-  width: 90%;
+  margin: 10px auto;
+  width: 75%;
 }
 .main-contain div {
   display: inline-block;
@@ -1178,5 +1190,12 @@ a.pure-button-selected {
   text-rendering: auto;
   width: 66.6667%;
   *width: 66.6357%;
+  color: #222222;
+  margin: 0 10px;
   overflow: auto;
+}
+.shadow {
+  -moz-box-shadow: 3px 3px 5px 6px #555;
+  -webkit-box-shadow: 3px 3px 5px 6px #555;
+  box-shadow: 3px 3px 5px 6px #555;
 }
