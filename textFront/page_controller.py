@@ -13,12 +13,16 @@ resources={
 "About": [],
 }
 
-# lis of available tasks
-tasks=['Frequencies', 'Word Distances']
+# tasks and their dependencies
+task_dependencies={
+'Frequencies':{'js':['Helper.js','frequencies.js'],'task-types':['All Tokens']},
+'Word Locations':{},
+}
+
+
 
 if __name__ == '__main__':
     print main_layout.keys()
     print main_layout['welcome']
-
 
 

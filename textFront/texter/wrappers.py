@@ -1,25 +1,28 @@
-from collections import Counter
+from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
-import nltk
+from itertools import *
 
 def get_tokens(s):
-    # tokens are defined as space seperated words
-    return sorted([w for w in s.split()])
+    '''
+    Returns a list of word tokens
+    '''
+
+    return word_tokenize(s)
+
 
 def lexical_diversity(s):
-    # *1.0 to prevent integer division
-    return len(set(s))*1.0 / len(s)
+    '''
+    Provides a measure of lexical diversity
+    '''
+    num_tokens = len(get_tokens(s))
+    num_unique_tokens = len(set(get_tokens(s)))
+    # * 1.0 below to make sure we're playing with floats
+    return num_tokens * 1.0 / num_tokens
 
-def get_word_counts(s):
-    cntr = Counter( nltk.word_tokenize(s))
-    return cntr
-
-def get_word_count(c, w):
-    return c[w]
-
-def get_freq_dist(s):
-    fd = FreqDist([x.lower() for x in s.split()])
-    return fd.most_common(50)
+def get_freq_dist_dict(s):
+    d={}
+    d.update([(x,y) for x,y in FreqDist(get_tokens(s)).iteritems()])
+    return d
 
 
 #########################
@@ -28,7 +31,6 @@ def get_freq_dist(s):
 import unittest
 
 class TestNLTKFunctions(unittest.TestCase):
-
     def test_get_tokens(self):
         self.assertTrue(len(get_tokens('This is my string')) == 4)
 
@@ -40,16 +42,8 @@ class TestNLTKFunctions(unittest.TestCase):
         test = 'My string is a diverse string.'
         self.assertTrue(lexical_diversity(test) > 0)
 
-    def test_word_counts_is_dict(self):
-        counter_dict = get_word_counts('this is my string!')
-        self.assertTrue(len(counter_dict.keys()) == 5)
-
-    def test_word_count(self):
-        c_dict = get_word_counts("My string is a good string")
-        self.assertTrue(get_word_count(c_dict, 'string') == 2)
-
-    def test_freq_dist_tokens(self):
-        fd = get_freq_dist('This is a string to get Freqy with.')
+    def test_freq_dist_dict(self):
+        fd = get_freq_dist_dict('This is a string to get Freqy with.')
         self.assertTrue('Freqy' in fd)
 
 

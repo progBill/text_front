@@ -1,18 +1,13 @@
 
-$( document ).ready(function(){
-    $.getJSON('/get_word_count')
-        .done(function( json ){ 
-            //$('.txtDisplay').html( json.textbody );
+function setTxtDisplay( txt ){
+    var elem = document.querySelector('.txtDisplay');
+    elem.innerHTML = txt; 
+    elem.style.backgroundColor = '#FFFFFF';
+};
 
-            var listString = '';
-            for ( elem in json.textbody ){
-                listString += json.textbody[elem] + ': ' + elem + '<br />'
-            }
+var h = new Helper('Freqy');
+h.make_ajax_request(setTxtDisplay, '/get_word_count');
 
-            $('.txtDisplay').html( listString );
-            $('.txtDisplay').css( 'background-color','white' );
 
-        });
-});
 
 

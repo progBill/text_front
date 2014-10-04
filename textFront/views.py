@@ -1,8 +1,11 @@
 from textFront import app
 from flask import render_template, jsonify, request, session
 from os import path
-from page_controller import resources, tasks, top_nav
-import textFront.texter.wrappers as w
+from page_controller import resources, top_nav, task_dependencies
+from textFront.texter import wrappers
+from nltk.probability import FreqDist
+from itertools import * 
+
 
 ################
 # Landing Page #
@@ -14,8 +17,8 @@ import textFront.texter.wrappers as w
 def index(page_key='Home'):
     template = '%s.html' % page_key
     available_texts = [dict(label=r.split('.')[0], link=r) for r in (resources[page_key])]
-    ts=[dict(name=x) for x in tasks]
-    return render_template(template, menus=top_nav, texts=available_texts, tasks=ts)
+    task_list=[dict(name=x) for x in task_dependencies.keys()]
+    return render_template(template, menus=top_nav, texts=available_texts, tasks=task_list)
 
 # ajax returns a text
 @app.route('/get_text')
@@ -34,17 +37,17 @@ def get_text():
 @app.route('/Frequencies')
 @app.route('/frequencies')
 def frequencies():
-    return render_template('Frequencies.html', menus=top_nav)
+    foot_incs = [x for x in task_dependencies['Frequencies']['js']]
+    return render_template('Frequencies.html', menus=top_nav, foot_includes=foot_incs)
 
 @app.route('/get_word_count')
 def get_word_count():
     text_loc = path.join('.', 'textFront','library', session['text_id'])
-    with open(text_loc, 'r') as f:
-        text = f.read()
-    fd = w.get_freq_dist( text )
+    with open(text_loc, 'r') as f: txt = f.read()
+    d = wrappers.get_freq_dist_dict(txt)
 
-    return jsonify({'textbody':fd})    
- 
+    return jsonify(d)    
+
 ##############
 # About Page #
 ##############
