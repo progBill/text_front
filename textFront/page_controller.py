@@ -1,7 +1,6 @@
 from os import listdir, path
 
 lib_path = path.join('.','textFront','library')
-#lib_path = path.join('.','library')
 
 # this list is the top navigation for the page
 # each page should be a Single Page Application

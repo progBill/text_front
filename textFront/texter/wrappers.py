@@ -1,25 +1,21 @@
+# -*- coding: utf-8 -*-
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from itertools import *
 
 def get_tokens(s):
-    '''
-    Returns a list of word tokens
-    '''
-
-    return word_tokenize(s)
-
+    '''Returns a list of word tokens'''
+    return word_tokenize(s.encode('utf-8'))
 
 def lexical_diversity(s):
-    '''
-    Provides a measure of lexical diversity
-    '''
+    '''Provides a measure of lexical diversity'''
     num_tokens = len(get_tokens(s))
     num_unique_tokens = len(set(get_tokens(s)))
     # * 1.0 below to make sure we're playing with floats
     return num_tokens * 1.0 / num_tokens
 
 def get_freq_dist_dict(s):
+    '''Returns a dict with words as keys and appearance count as value'''
     d={}
     d.update([(x,y) for x,y in FreqDist(get_tokens(s)).iteritems()])
     return d

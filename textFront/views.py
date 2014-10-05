@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from textFront import app
 from flask import render_template, jsonify, request, session
 from os import path
@@ -15,7 +16,9 @@ from itertools import *
 @app.route('/Home')
 @app.route('/home')
 def index(page_key='Home'):
+    '''returns html for the landing page'''
     template = '%s.html' % page_key
+    # create dictionaries for content 
     available_texts = [dict(label=r.split('.')[0], link=r) for r in (resources[page_key])]
     task_list=[dict(name=x) for x in task_dependencies.keys()]
     return render_template(template, menus=top_nav, texts=available_texts, tasks=task_list)
