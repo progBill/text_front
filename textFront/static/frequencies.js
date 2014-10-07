@@ -9,8 +9,8 @@ Frequencies.prototype = Helper.prototype;
 Frequencies.prototype.setFreq = function(x){ this.big_freq = x };
 var f = new Frequencies("Frequencies");
 
-var data = f.getJson('/get_word_count'); //, f.setTextByClass, '.whiteList'); 
-f.setFreq( data );
+f.getJson('/get_word_count', f.setTextByClass, '.whiteList'); 
+
+console.log( f );
 
 
-console.log( data );

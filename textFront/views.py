@@ -41,7 +41,8 @@ def get_text():
 @app.route('/frequencies')
 def frequencies():
     foot_incs = [x for x in task_dependencies['Frequencies']['js']]
-    return render_template('Frequencies.html', menus=top_nav, foot_includes=foot_incs)
+    subtasks = task_dependencies['Frequencies']['task-types']
+    return render_template('Frequencies.html', menus=top_nav, foot_includes=foot_incs, tasks=subtasks)
 
 @app.route('/get_word_count')
 def get_word_count():

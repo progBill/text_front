@@ -1,8 +1,8 @@
 {% extends "mainnav.html" %}
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
-<div class="pure-u-1-8" > 
-    <div class="pure-menu pure-menu-open leftbar">{ for loop here for subtasks }</div>
+<div class="pure-u-1-8" >{% for task in tasks %}
+    <div class="pure-menu pure-menu-open leftbar">{{ task }}</div>{% endfor %}
 </div>
 <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas" ></textarea>
 <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>

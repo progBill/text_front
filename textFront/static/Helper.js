@@ -21,7 +21,7 @@ Helper.prototype = {
     setTextByClass: function( x ){
         var elem = document.querySelector( x.selector );
         elem.style.backgroundColor = '#FFFFFF';
-        elem.innerHTML = x.freq;
+        elem.value = x.freq;
     },
     getTextByClass: function( x ){
         return document.querySelector( x ).value;
