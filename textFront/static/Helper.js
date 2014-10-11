@@ -1,24 +1,21 @@
-
-function Helper( t ){ this.name= t; };
-
+function Helper( t ){ this.name= t; console.log("new helper: " + t); };
 Helper.prototype = {
-    getJson: function( url, cb, args ){
-        // will not work in old MS browsers
+    getJson: function( url, cb){
+        console.log("getting stuff");
         var ajax_req = new XMLHttpRequest();
-        // code to be called when the server serves
         ajax_req.onreadystatechange = function(){
-            // if a callback has been defined, fire it, else just return the value
-
+            console.log("ajax ready: " + ajax_req.readyState);
+            // callback required 
             if ( ajax_req.readyState === 4 && cb ){
-                cb({selector:args, freq:ajax_req.responseText});
-            } else if (ajax_req.readyState === 4 && !cb ) {
-                return ajax_req.responseText;
-            }
-        };
+                cb( ajax_req.responseText );
+                console.log("req: " + ajax_req.responseText );
+            };
         ajax_req.open( "GET", url, true );
         ajax_req.send( null );
+        }
     },
     setTextByClass: function( x ){
+        console.log("setting text to: " + x.freq);
         var elem = document.querySelector( x.selector );
         elem.style.backgroundColor = '#FFFFFF';
         elem.value = x.freq;
@@ -27,5 +24,4 @@ Helper.prototype = {
         return document.querySelector( x ).value;
     }, 
 };
-
 

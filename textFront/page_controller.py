@@ -14,7 +14,7 @@ resources={
 
 # tasks and their dependencies
 task_dependencies={
-'Frequencies':{'js':['Chart.js/Chart.js','Helper.js','frequencies.js'],'task-types':['All Tokens','Hapaxes','Non-Hapaxes','Long Words']},
+'Frequencies':{'js':['Chart.js/Chart.js','store.js','Helper.js','frequencies.js'],'task-types':['All Tokens','Hapaxes','Non-Hapaxes','Long Words']},
 'Word Locations':{},
 }
 
