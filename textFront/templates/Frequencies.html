@@ -2,11 +2,10 @@
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
 <div class="pure-u-1-8" >{% for task in tasks %}
-    <div class="pure-menu pure-menu-open leftbar">{{ task }}</div>{% endfor %}
+    <div class="pure-menu pure-menu-open leftbar js{{ task }}">{{ task }}</div>{% endfor %}
 </div>
 <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas" ></textarea>
 <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>
-<input class="jsFreqStore" type="text" style="display: none" \>
 
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="/static/{{ inc }}"></script>

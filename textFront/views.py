@@ -40,7 +40,6 @@ def get_text():
 @app.route('/Frequencies')
 @app.route('/frequencies')
 def frequencies():
-    print "loading frequencies"
     foot_incs = [x for x in task_dependencies['Frequencies']['js']]
     subtasks = task_dependencies['Frequencies']['task-types']
     return render_template('Frequencies.html', menus=top_nav, foot_includes=foot_incs, tasks=subtasks)
@@ -50,8 +49,7 @@ def get_word_count():
     text_loc = path.join('.', 'textFront','library', session['text_id'])
     with open(text_loc, 'r') as f: txt = f.read()
     d = wrappers.get_freq_dist_dict(txt)
-    print "getting stuff: %s" % d
-    return jsonify(d)    
+    return jsonify(d)
 
 ##############
 # About Page #

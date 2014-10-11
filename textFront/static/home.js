@@ -1,7 +1,5 @@
-
 $( document ).ready(function(){
     $txtDisplay = $('.txtDisplay');
-
     /**
      * stuff that happens when you select a text 
      * from the left menu bar
@@ -17,7 +15,4 @@ $( document ).ready(function(){
     });
 
 });
-
-
-
 
