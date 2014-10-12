@@ -13,6 +13,5 @@ $( document ).ready(function(){
         $('.right-container li').removeClass('pure-menu-disabled');
         $txtDisplay.css('background-color','white');
     });
-
 });
 

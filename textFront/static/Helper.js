@@ -1,5 +1,4 @@
 var helper = (function(){
-
     return{
         setTextByClass: function( x ){
             var elem = document.querySelector( x.selector );
@@ -11,7 +10,7 @@ var helper = (function(){
             ajax_req.onreadystatechange = function(){
                 // callback required
                 if ( ajax_req.readyState === 4 && cb ){
-                    var data = {}
+                    var data = {};
                     JSON.parse(ajax_req.responseText, function(k,v){ data[k] = v; })
                     for (var k in data){
                         cb( k, data[k] );
@@ -24,9 +23,10 @@ var helper = (function(){
         getTextByClass: function( x ){
             return document.querySelector( x ).value;
         },
-        onClickByClass: function(cls, cb){
-            document.querySelector( cls ).click( cb );
+        onClickByClass: function(cls, cb, args){
+            document.querySelector( cls ).addEventListener('click', function(){ cb(args); } );
         },
         out: function(){ console.log("helper out"); },
     }
 })();
+
