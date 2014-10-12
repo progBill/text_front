@@ -1,7 +1,4 @@
-function Store(){
-//    lib={};
-//    this.lib = lib;
-};
+function Store(){};
 Store.prototype.lib={};
 Store.prototype.topics={};
 Store.prototype.subscribe=function(topic, cb){
@@ -22,9 +19,9 @@ Store.prototype.publish=function(topic, info){
 //    this.lib = {};
 //    }
 //};
-//Store.prototype.getLib=function(){
-//    return this.lib;
-//};
+Store.prototype.getLib=function(){
+    return this.lib;
+};
 Store.prototype.getter=function(x){
     return this.lib[x];
 };
@@ -36,3 +33,5 @@ Store.prototype.out=function(x){
 };
 
 var store = new Store();
+
+

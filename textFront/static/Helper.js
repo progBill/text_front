@@ -28,11 +28,13 @@ Helper.prototype.getJson = function(url, cb){
             for (var k in data){
                 cb( k, data[k] );
             }
+            store.publish('LIB_READY');
         };
     }
     ajax_req.open( "GET", url, true );
     ajax_req.send( null );
 };
 
-
 Helper.prototype.out = function(x ){ console.log(x); };
+
+
