@@ -13,12 +13,6 @@ Store.prototype.publish=function(topic, info){
         cb(info || {});
     });
 };
-
-//Store.prototype.setLib=function(x){
-//    if (!this.lib[x]){
-//    this.lib = {};
-//    }
-//};
 Store.prototype.getLib=function(){
     return this.lib;
 };
@@ -26,7 +20,8 @@ Store.prototype.getter=function(x){
     return this.lib[x];
 };
 Store.prototype.setter=function(x,y){
-    if(!this.lib){ this.lib={x:y} };
+    if(!this.lib){ lib={}; };
+     this.lib[x]=y;
 };
 Store.prototype.out=function(x){
     console.log(x);
