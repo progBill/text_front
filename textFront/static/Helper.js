@@ -16,9 +16,16 @@ Helper.prototype.setTextByClass = function(x){
 
     elem.value = content;
 };
-
+Helper.prototype.showElem = function( cls ){
+    var elem = document.querySelector( cls );
+    elem.style.display = 'inline';
+};
+Helper.prototype.hideElem= function( cls ){
+    var elem = document.querySelector( cls );
+    elem.style.display = 'none';
+};
 Helper.prototype.onClickByClass = function(cls, cb, args){
-    document.querySelector( cls ).addEventListener('click', function(){ cb(args); } );
+    document.querySelector( cls ).addEventListener('click', function(){ cb(args) });
 };
 
 Helper.prototype.getJson = function(url){

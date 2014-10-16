@@ -51,6 +51,10 @@ def get_word_count():
     d = wrappers.get_freq_dist_dict(txt)
     return jsonify(d)
 
+@app.route('/get_longest')
+def get_longest_words():
+    pass
+
 ##############
 # About Page #
 ##############

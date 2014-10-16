@@ -1145,6 +1145,10 @@ a.pure-button-selected {
   border-radius: 10px;
   /* future proofing */
 }
+.display,
+.params {
+  display: none;
+}
 .guide-bar {
   display: inline-block;
   *display: inline;
@@ -1167,8 +1171,8 @@ a.pure-button-selected {
   word-spacing: normal;
   vertical-align: top;
   text-rendering: auto;
-  width: 12.5%;
-  *width: 12.469%;
+  width: 16.6667%;
+  *width: 16.6357%;
   text-align: center;
 }
 .main-contain {

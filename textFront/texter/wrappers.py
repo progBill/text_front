@@ -7,6 +7,9 @@ def get_tokens(s):
     '''Returns a list of word tokens'''
     return word_tokenize(s.encode('utf-8'))
 
+def get_longest_words(s):
+    pass
+
 def lexical_diversity(s):
     '''Provides a measure of lexical diversity'''
     num_tokens = len(get_tokens(s))
