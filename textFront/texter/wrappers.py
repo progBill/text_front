@@ -24,6 +24,13 @@ def get_freq_dist_dict(s):
     return d
 
 
+def get_longest_words(s, x=10):
+    '''Returns a list of the X longest  words'''
+    tokens = get_tokens(s)
+    long_words= sorted(tokens, key=lambda l: len(l))
+    return long_words[x*-1:]
+
+
 #########################
 ##  Just a way to test ##    
 #########################
@@ -44,7 +51,6 @@ class TestNLTKFunctions(unittest.TestCase):
     def test_freq_dist_dict(self):
         fd = get_freq_dist_dict('This is a string to get Freqy with.')
         self.assertTrue('Freqy' in fd)
-
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestNLTKFunctions)

@@ -53,7 +53,8 @@ def get_word_count():
 
 @app.route('/get_longest')
 def get_longest_words():
-    pass
+    s = requests.args.get('words')
+    return wrappers.get_longest_words(s, x)
 
 ##############
 # About Page #

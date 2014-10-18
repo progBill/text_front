@@ -8,33 +8,28 @@ Frequencies.prototype.getHapaxes = function(){
     var lib = store.getLib();
     for (var w in lib){
         if (lib[w]===1){
-            hapaxes.push(w);
+            hapaxes.push(w+='<br />');
         }
     }
-    frequencies.setTextByClass({selector:'.whiteList', data:hapaxes});
+    frequencies.hideElem('.params');
+    frequencies.setTextByClass({selector:'.txtDisplay', data:hapaxes});
 };
 Frequencies.prototype.getLongest= function(){
-    var longest=[];
-    var lib = store.getLib();
-    for (var w in lib){
-        
-    }
+   this.getJson('/get_longest_word'); 
 };
+
 /**
  * Setup 
  */
 function turnTestsOn(){
-    frequencies.onClickByClass('.jsHapaxes', frequencies.setTextByClass, {selector:'.blackList',data:'this be a test, yo'});
-//    frequencies.onClickByClass('.fMenu', function(){ $('.bdy').css('background-color','red'); });
-    frequencies.onClickByClass('.fMenu', frequencies.showElem, '.params');
-    frequencies.getHapaxes();
+    frequencies.onClickByClass('.jsHapaxes', frequencies.getHapaxes);
 };
-var frequencies = new Frequencies("Freqs");
-store.subscribe('LIB_READY', turnTestsOn);
 
 /**
  * behavior hooks
  */
-
-frequencies.getJson('/get_word_count');
+var frequencies = new Frequencies("Freqs");
+store.subscribe('LIB_READY', turnTestsOn);
+frequencies.getJson('/get_word_count', 'LIB_READY');
 frequencies.showElem('.display');
+

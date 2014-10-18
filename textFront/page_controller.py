@@ -1,5 +1,6 @@
 from os import listdir, path
-lib_path = path.join('.','textFront','library')
+
+lib_path = path.join('.', 'textFront', 'library')
 
 # this list is the top navigation for the page
 # each page should be a Single Page Application
@@ -13,8 +14,12 @@ resources={
 
 # tasks and their dependencies
 task_dependencies={
-'Frequencies':{'js':['Chart.js/Chart.js','Store.js','Helper.js','Frequencies.js'],'task-types':['All Tokens','Hapaxes','Non-Hapaxes','Long Words']},
-'Word Locations':{},
+    'Frequencies':{
+        'js':['Chart.js/Chart.js','Store.js','Helper.js','Frequencies.js'],
+        'task-types':['All Tokens','Hapaxes','Non-Hapaxes','Long Words']
+
+    },
+    'Word Locations':{},
 }
 
 if __name__ == '__main__':

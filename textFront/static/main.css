@@ -1145,9 +1145,21 @@ a.pure-button-selected {
   border-radius: 10px;
   /* future proofing */
 }
+.task-results,
 .display,
 .params {
   display: none;
+}
+.leftbar {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto;
+  width: 16.6667%;
+  *width: 16.6357%;
 }
 .guide-bar {
   display: inline-block;
@@ -1192,8 +1204,8 @@ a.pure-button-selected {
   word-spacing: normal;
   vertical-align: top;
   text-rendering: auto;
-  width: 66.6667%;
-  *width: 66.6357%;
+  width: 58.3333%;
+  *width: 58.3023%;
   color: #222222;
   margin: 0 10px;
   overflow: auto;

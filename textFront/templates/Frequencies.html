@@ -2,7 +2,7 @@
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
 <div class='frequencies'>
-    <div class="pure-u-1-8" >{% for task in tasks %}
+    <div class="task-menu left-container" >{% for task in tasks %}
         <div class="pure-menu pure-menu-open leftbar"><a class="fMenu js{{ task.replace(' ','-') }}" href="#{{ task.replace(' ','-') }}">{{ task }}</a></div>{% endfor %}
     </div>
     <span class='display'>
@@ -11,6 +11,9 @@
     <span class='params'>
         <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas"></textarea>
         <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>
+    </span>
+    <span class="task-results">
+        <div class="results"></div>
     </span>
 </div>
 {% endblock %}
