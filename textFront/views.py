@@ -51,10 +51,6 @@ def get_word_count():
     d = wrappers.get_freq_dist_dict(txt)
     return jsonify(d)
 
-@app.route('/get_longest')
-def get_longest_words():
-    s = requests.args.get('words')
-    return wrappers.get_longest_words(s, x)
 
 ##############
 # About Page #
@@ -63,6 +59,17 @@ def get_longest_words():
 @app.route('/about')
 def about():
     return render_template('About.html', menus=top_nav)
+
+###############
+# Error Pages #
+###############
+@app.errorhandler(404)
+def page_not_found(e):
+    return '404<br />The aptly named: Sir Not Appearing in this site.'
+
+@app.errorhandler(500)
+def server_error(e):
+    return '500<br />Noone expects the server to error!<br /><br />but it did...'
 
 #############################
 # For Dev only, delete live #
