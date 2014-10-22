@@ -1,6 +1,4 @@
-function Frequencies (){
-    Helper.apply(this, arguments);
-};
+function Frequencies (){ Helper.apply(this, arguments); };
 // sort-of inheritence
 Frequencies.prototype = Helper.prototype;
 var frequencies = new Frequencies();
