@@ -1187,11 +1187,13 @@ a.pure-button-selected {
   *width: 16.6357%;
   text-align: center;
 }
-.main-contain {
+.main-contain,
+.frequencies {
   height: 85vh;
   margin: 10px auto;
   width: 75%;
 }
+.main-contain div,
 .frequencies div {
   display: inline-block;
   max-height: 100%;

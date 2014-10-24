@@ -1,6 +1,6 @@
-from os import listdir, path
+from os import listdir, path, getcwd
 
-lib_path = path.join('.', 'textFront', 'library')
+lib_path = path.join(getcwd(), 'textFront', 'library')
 
 # this list is the top navigation for the page
 top_nav =['Home',"About"]
