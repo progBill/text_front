@@ -24,15 +24,18 @@ def index(page_key='Home'):
     return render_template(template, menus=top_nav, texts=available_texts, tasks=task_list)
 
 # ajax returns a text
-@app.route('/get_text')
-def get_text():
+@app.route('/get_idx', methods=['POST'])
+def get_idx():
     """Sets text in session, returns body of text"""
     session['text_id'] = request.args.getlist('text_id')[0]
+    text = get_text(session['text_id'])
+    return jsonify({"textbody":text})
+
+def get_text(id):
     text_loc = path.join('.', 'textFront','library', session['text_id'])
     with open(text_loc, 'r') as f:
         text = f.read()
-    text = text.replace('\r\n','<br />')
-    return jsonify({"textbody":text})
+    return text.replace('\r\n','<br />')
 
 ###############
 # Frequencies #
@@ -44,13 +47,22 @@ def frequencies():
     subtasks = task_dependencies['Frequencies']['task-types']
     return render_template('Frequencies.html', menus=top_nav, foot_includes=foot_incs, tasks=subtasks)
 
-@app.route('/get_word_count')
+@app.route('/get_word_count', methods=['POST'])
 def get_word_count():
     text_loc = path.join('.', 'textFront','library', session['text_id'])
     with open(text_loc, 'r') as f: txt = f.read()
     d = wrappers.get_freq_dist_dict(txt)
     return jsonify(d)
 
+@app.route('/get_word_freq_in_chunk', methods=['POST'])
+def get_word_freq_in_chunk():
+    w=request.args.getlist('word') 
+    s=get_text(session['text_id'])
+
+    freq_list = wrappers.get_chunked_word_frequency(s,w)
+    freq_dict = dict(zip(range(0,len(freq_list)),freq_list))
+
+    return jsonify(freq_dict)
 
 ##############
 # About Page #
@@ -78,6 +90,5 @@ def server_error(e):
 def get_session():
     session['checked_sess'] = True
     return ' '.join(['%s:    %s<br />' % (x, session[x]) for x in session]) 
-
 
 

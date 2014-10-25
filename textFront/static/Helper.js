@@ -29,18 +29,30 @@ Helper.prototype.onClickByClass = function(cls, cb, args){
     document.querySelector( cls ).addEventListener('click', function(){ cb(args) });
 };
 
-Helper.prototype.getJson = function(url, tag){
-    var ajax_req = new XMLHttpRequest();
-    ajax_req.onreadystatechange = function(){
-        if ( ajax_req.readyState === 4 ){
+Helper.prototype.getJson = function(url, tag, requestArgs){
+    var reqArgs = requestArgs || null;
+    var ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function(){
+        if ( ajaxRequest.readyState === 4 ){
             var data = {};
-            JSON.parse(ajax_req.responseText, function(k,v){ data[k] = v; });
-            store.lib = data;
+            JSON.parse(ajaxRequest.responseText, function(k,v){ data[k] = v; });
+            // TODO: this assignment should be in the store
+            switch( url ){
+                case '/get_word_count':
+                    store.lib = data;
+                    break;
+                case '/get_word_freq_in_chunk':
+                    store.chunk_freq = data;
+console.log(store.chunk_freq);                    
+            }
             store.publish( tag );
         };
     }
-    ajax_req.open( "GET", url, true );
-    ajax_req.send( null );
+    ajaxRequest.open( "POST", url, true );
+    ajaxRequest.send( reqArgs );
 };
 
 Helper.prototype.out = function( x ){ console.log(x); };
+
+
+
