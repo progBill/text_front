@@ -13,12 +13,14 @@ resources={
 
 # tasks and their dependencies
 task_dependencies={
+    'Home':{
+        'js':['Store.js','Helper.js','Home.js'],
+    },
     'Frequencies':{
         'js':['Chart.js/Chart.js','Store.js','Helper.js','Frequencies.js'],
-        'task-types':['All Tokens','Hapaxes','Long Words']
-
+        'task-types':['All Tokens','Hapaxes','Long Words', 'Chart']
     },
-    'Word Locations':{},
+#    'Word Locations':{},
 }
 
 

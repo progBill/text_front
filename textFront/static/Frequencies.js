@@ -90,7 +90,51 @@ Frequencies.prototype.displayLongest= function(){
     longWords = longWords.sort(function(a, b){ return b.length-a.length; }).slice(0, num);
     frequencies.setTextByClass({selector:'.txtDisplay',data:longWords});
 };
+Frequencies.prototype.displayChart=function(){
+    store.chunk_freq={};
+////BEGIN PARAMS
+    var chartWords=[];
+    var whiteList = [];
+    var blackList = [];
+    if (frequencies.getTextByClass(".whiteList").length > 1){
+         whiteList = frequencies.getTextByClass('.whiteList').replace(/, /g, ',').replace(/\n/g, '').split(',');
+    }
+    if (frequencies.getTextByClass(".blackList").length > 1){
+         blackList = frequencies.getTextByClass('.blackList').replace(/, /g, ',').replace(/\n/g, '').split(',');
+    }
 
+////END PARAMS
+    for (var w in whiteList){
+        //TODO: check this out, it fires when first call is done instead of last call.
+        frequencies.getJson('/get_word_freq_in_chunk','CHUNKS',whiteList[w]);
+    };
+}
+Frequencies.prototype.makeChart=function(){
+    // Get the context of the canvas element we want to select
+    var ctx = document.getElementById("chart").getContext("2d");
+
+    var wordData = [];
+    for (var i in store.chunk_freq){    
+       wordData.push({
+            label: i,
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: store.chunk_freq[i]
+        })
+    }
+
+    var data = {
+        labels: new Array(store.chunk_freq[i].length),
+        datasets: wordData,
+    };
+
+    new Chart(ctx).Line(data);
+
+};
 /**
  * Utilities and Setup 
  */
@@ -101,7 +145,6 @@ Frequencies.prototype.paramHapaxes = function(){
     frequencies.setTextByClass({selector:'.whiteList', data:''});
     frequencies.setTextByClass({selector:'.blackList', data:''});
     frequencies.onClickByClass('.jsTaskExecute', frequencies.displayHapaxes);
-
 };
 Frequencies.prototype.paramLongest = function(){
     frequencies.hideElem('.display');
@@ -110,47 +153,26 @@ Frequencies.prototype.paramLongest = function(){
     frequencies.setTextByClass({selector:'.blackList', data:''});
     frequencies.onClickByClass('.jsTaskExecute', frequencies.displayLongest);
 };
+Frequencies.prototype.paramChart = function(){
+    frequencies.hideElem('.display');
+    frequencies.showElem('.params');
+    frequencies.setTextByClass({selector:'.whiteList', data:''});
+    frequencies.setTextByClass({selector:'.blackList', data:''});
+    frequencies.onClickByClass('.jsTaskExecute', frequencies.displayChart);
+};
+
 function turnTestsOn(){
     frequencies.onClickByClass('.jsHapaxes', frequencies.paramHapaxes);
     frequencies.onClickByClass('.jsAll-Tokens', frequencies.displayAll);
     frequencies.onClickByClass('.jsLong-Words', frequencies.paramLongest);
-    frequencies.getJson('/get_word_freq_in_chunk','CHUNKS','and');
+    frequencies.onClickByClass('.jsChart', frequencies.paramChart);
+//    frequencies.getJson('/get_word_freq_in_chunk','CHUNKS','and');
 };
 
+/////////  SETUP
 store.subscribe('LIB_READY', turnTestsOn);
+store.subscribe('CHUNKS', frequencies.makeChart);
 frequencies.getJson('/get_word_count', 'LIB_READY');
 frequencies.showElem('.display');
-////////////// testing charts
-
-var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-
-
-// Get the context of the canvas element we want to select
-var ctx = document.getElementById("chart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data);
 
 

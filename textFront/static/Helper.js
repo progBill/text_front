@@ -42,8 +42,11 @@ Helper.prototype.getJson = function(url, tag, requestArgs){
                     store.lib = data;
                     break;
                 case '/get_word_freq_in_chunk':
-                    store.chunk_freq = data;
-console.log(store.chunk_freq);                    
+                    var test = JSON.parse(ajaxRequest.responseText);
+                    for (var i in test){
+                        if ( typeof(store.chunk_freq) ==='undefined' ){ store.chunk_freq={}; }
+                        store.chunk_freq[i]=test[i];
+                    }
             }
             store.publish( tag );
         };

@@ -28,7 +28,7 @@ def get_longest_words(s, x=10):
     return long_words[x*-1:]
 
 
-def get_chunked_word_frequency(s,w, chunk_size=300):
+def get_chunked_word_frequency(s,w, chunk_size=1000):
     '''takes a text and a word, returns a list of frequencies'''
     token_list = get_tokens(s)
     num_tokens = len(token_list)
