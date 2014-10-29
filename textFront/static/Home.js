@@ -7,7 +7,7 @@ Home.prototype.getText = function( title ){
     home.getJson('/get_idx', 'TEXT_SET', this.innerHTML );
 };
 Home.prototype.displayText= function(){
-    home.setTextByClass({selector: '.txtDisplay', data:'I ruined the text display.  It will return...'});    
+    home.setTextByClass({selector: '.txtDisplay', data:store.text }); 
 };
 Home.prototype.setBookClick= function(){
     var texts = document.querySelector(".leftbar").getElementsByTagName("a");
