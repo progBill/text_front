@@ -38,6 +38,8 @@ Helper.prototype.getJson = function(url, tag, requestArgs){
             JSON.parse(ajaxRequest.responseText, function(k,v){ data[k] = v; });
             // TODO: this assignment should be in the store
             switch( url ){
+                case '/get_idx':
+                    store.text= data['textbody'];
                 case '/get_word_count':
                     store.lib = data;
                     break;

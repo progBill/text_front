@@ -110,25 +110,29 @@ Frequencies.prototype.displayChart=function(){
     };
 }
 Frequencies.prototype.makeChart=function(){
+console.log('making chart');
+
     // Get the context of the canvas element we want to select
     var ctx = document.getElementById("chart").getContext("2d");
-
+    var colorOffset = 0;
     var wordData = [];
-    for (var i in store.chunk_freq){    
+    for (var i in store.chunk_freq){   
+ 
        wordData.push({
             label: i,
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
+            fillColor: "rgba(220,220,"+(10+colorOffset)+",0.2)",
+            strokeColor: "rgba(220,220,"+(10+colorOffset)+ ",1)",
+            pointColor: "rgba(220,220,"+(10+colorOffset)+",1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
             data: store.chunk_freq[i]
         })
+        colorOffset += 75;
     }
 
     var data = {
-        labels: new Array(store.chunk_freq[i].length),
+        labels: Array.apply(null, Array(store.chunk_freq[i].length)).map(function() { return '' }), 
         datasets: wordData,
     };
 
