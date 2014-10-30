@@ -1,4 +1,4 @@
-function Frequencies (){ Helper.apply(this, arguments); };
+function Frequencies (){ Helper.apply(this, arguments); }
 // sort-of inheritence
 Frequencies.prototype = Helper.prototype;
 var frequencies = new Frequencies();
@@ -12,8 +12,10 @@ Frequencies.prototype.displayAll = function(){
     var allWords = [];
     var lib = store.getLib();
     for (var w in lib){
+      if (w.prototypeOf(lib)){
         allWords.push(w+= ' ( ' + lib[w] + ' )<br />');
-    }
+        }
+        }
     allWords = allWords.sort(function(a, b){ 
         var a1 = a.lastIndexOf('( ')+1;
         var a2 = a.lastIndexOf(' )');
@@ -47,12 +49,14 @@ Frequencies.prototype.displayHapaxes = function(){
          blackList = frequencies.getTextByClass('.blackList').replace(/, /g, ',').replace(/\n/g, '').split(',');
     }
     for (var w in lib){
+      if (lib.hasOwnPoperty(w)){
         var inWhite=true;
         var inBlack=false;
         // see if the list exists, then whether a particular word is on it
         if (whiteList.length > 0 && whiteList.indexOf(w) === -1) inWhite = false;
         if (blackList.length > 0 && blackList.indexOf(w) !== -1) inBlack = true;
         if (inWhite && !inBlack ){ hapaxes.push(w+='<br />'); }
+    }
     }
 ////END PARAM PROCESSING
 
@@ -79,12 +83,14 @@ Frequencies.prototype.displayLongest= function(){
          blackList = frequencies.getTextByClass('.blackList').replace(/, /g, ',').replace(/\n/g, '').split(',');
     }
     for (var w in lib){
+      if (lib.hasOwnProperty(w)){
         var inWhite=true;
         var inBlack=false;
         // see if the list exists, then whether a particular word is on it
         if (whiteList.length > 0 && whiteList.indexOf(w) === -1) inWhite = false;
         if (blackList.length > 0 && blackList.indexOf(w) !== -1) inBlack = true;
         if (inWhite && !inBlack ){ longWords.push(w+='<br />'); }
+      }
     }
 ////END PARAMS
     longWords = longWords.sort(function(a, b){ return b.length-a.length; }).slice(0, num);
@@ -93,7 +99,6 @@ Frequencies.prototype.displayLongest= function(){
 Frequencies.prototype.displayChart=function(){
     store.chunk_freq={};
 ////BEGIN PARAMS
-    var chartWords=[];
     var whiteList = [];
     var blackList = [];
     if (frequencies.getTextByClass(".whiteList").length > 1){
@@ -105,10 +110,12 @@ Frequencies.prototype.displayChart=function(){
 
 ////END PARAMS
     for (var w in whiteList){
+      if (whiteList.hasOwnProperty(w)){
         //TODO: check this out, it fires when first call is done instead of last call.
         frequencies.getJson('/get_word_freq_in_chunk','CHUNKS',whiteList[w]);
-    };
-}
+      }
+    }
+};
 Frequencies.prototype.makeChart=function(){
 console.log('making chart');
 
@@ -116,9 +123,9 @@ console.log('making chart');
     var ctx = document.getElementById("chart").getContext("2d");
     var colorOffset = 0;
     var wordData = [];
-    for (var i in store.chunk_freq){   
- 
-       wordData.push({
+    for (var i in store.chunk_freq){
+      if (store.chunk_freq.hasOwnProperty(i)){
+        wordData.push({
             label: i,
             fillColor: "rgba(220,220,"+(10+colorOffset)+",0.2)",
             strokeColor: "rgba(220,220,"+(10+colorOffset)+ ",1)",
@@ -127,12 +134,14 @@ console.log('making chart');
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
             data: store.chunk_freq[i]
-        })
+    
+            });
         colorOffset += 75;
+      }
     }
 
     var data = {
-        labels: Array.apply(null, Array(store.chunk_freq[i].length)).map(function() { return '' }), 
+        labels: Array.apply(null, Array(store.chunk_freq[i].length)).map(function() { return ''; }), 
         datasets: wordData,
     };
 
@@ -171,7 +180,7 @@ function turnTestsOn(){
     frequencies.onClickByClass('.jsLong-Words', frequencies.paramLongest);
     frequencies.onClickByClass('.jsChart', frequencies.paramChart);
 //    frequencies.getJson('/get_word_freq_in_chunk','CHUNKS','and');
-};
+}
 
 /////////  SETUP
 store.subscribe('LIB_READY', turnTestsOn);
