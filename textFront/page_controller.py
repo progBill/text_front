@@ -17,7 +17,7 @@ task_dependencies={
         'js':['Store.js','Helper.js','Home.js'],
     },
     'Frequencies':{
-        'js':['Chart.js/Chart.js','Store.js','Helper.js','Frequencies.js'],
+        'js':['Highcharts-4.0.4/js/highcharts.js','Store.js','Helper.js','Frequencies.js'],
         'task-types':['All Tokens','Hapaxes','Long Words', 'Chart']
     },
 #    'Word Locations':{},

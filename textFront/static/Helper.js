@@ -19,6 +19,7 @@ Helper.prototype.setTextByClass = function(x){
 };
 Helper.prototype.showElem = function( cls ){
     var elem = document.querySelector( cls );
+    if (!elem) { document.getElementById( cls )}
     elem.style.display = 'inline';
 };
 Helper.prototype.hideElem= function( cls ){
