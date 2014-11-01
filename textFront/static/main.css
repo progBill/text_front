@@ -1238,5 +1238,6 @@ a.pure-button-selected {
   box-shadow: 3px 3px 5px 6px #555;
 }
 #chart {
-  background-color: red;
+  display: none;
+  margin-left: 10px;
 }

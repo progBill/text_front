@@ -1,7 +1,7 @@
 {% extends "mainnav.html" %}
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
-<div class='frequencies'>
+<div class='main-contain'>
     <div class="task-menu left-container" >{% for task in tasks %}
         <div class="pure-menu pure-menu-open leftbar"><a class="fMenu js{{ task.replace(' ','-') }}" href="#{{ task.replace(' ','-') }}">{{ task }}</a></div>{% endfor %}
     </div>
@@ -14,7 +14,7 @@
         <a class="pure-button button-task jsTaskExecute">Run Task</a>
     </span>
     <span class="charts">
-        <canvas id="chart" width="1200" height="500"></canvas>
+        <div id="chart" style="width:100%;height:100%" ></div>
     </span>
 </div>
 {% endblock %}
