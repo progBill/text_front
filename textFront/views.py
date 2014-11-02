@@ -6,6 +6,7 @@ from page_controller import resources, top_nav, task_dependencies
 from textFront.texter import wrappers
 from nltk.probability import FreqDist
 from itertools import * 
+import json
 
 ################
 # Landing Page #
@@ -56,10 +57,12 @@ def get_word_count():
 
 @app.route('/get_word_freq_in_chunk', methods=['POST'])
 def get_word_freq_in_chunk():
-    w=request.data
+    word_list= json.loads(request.data)
     s=get_text(session['text_id'])
-    freq_list = wrappers.get_chunked_word_frequency(s,w)
-    return jsonify({w:freq_list})
+    freq_list={};
+    for w in word_list:
+        freq_list[w]=wrappers.get_chunked_word_frequency(s,w, 1600)
+    return jsonify(freq_list)
 
 ##############
 # About Page #
