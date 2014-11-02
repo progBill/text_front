@@ -12,6 +12,10 @@
 
 @max-body-height: 100%;
 
+.gutter (@len){
+    margin: @len;
+}
+
 .bdy{
     background-color: @nice-blue - #111;
 }
@@ -50,10 +54,19 @@
     text-align: center;
 }
 
-.main-contain{
+.left-container{
+    float:left;
+}
+
+.right-container{
+    float:right;
+}
+
+.main-contain{ background-color: red;
     height: 85vh;
     margin: 10px auto;
-    width: 75%;
+    padding-left: 10%;
+    width: 85%;
 }
 
 .main-contain div { 
@@ -68,7 +81,7 @@
     margin: 0 10px;
     max-height: 85vh;
     overflow: auto;
-
+    width: 65%;
 }
 .params{
     .pure-u-1-2;
@@ -89,7 +102,12 @@
   box-shadow:         3px 3px 5px 6px #555;
 }
 
+.task-list{
+    float:right;
+}
+
 #chart{
+    .gutter(10px);
     display: none;
     margin-left: 10px;
 }

@@ -93,10 +93,10 @@ console.log( hapaxes );
  * it defaults to 100
  */
 Frequencies.prototype.displayLongest= function(){
-    var num = frequencies.getTextByClass('.whiteList') || 100;
-    var longWords = store.getList().sort(function(a, b){ return b.length-a.length; }).slice(0, num);
+    var num = frequencies.getTextByClass('.len') || 100;
+    var longWords = store.getList().sort(function(a, b){ return b.length-a.length; });
     longWords = frequencies.formatList( longWords );
-    frequencies.setTextByClass({selector:'.txtDisplay',data:longWords});
+    frequencies.setTextByClass({selector:'.txtDisplay',data:longWords.slice(0,num)});
     frequencies.blitElem('.display');
 };
 Frequencies.prototype.displayChart=function(){
@@ -127,7 +127,6 @@ Frequencies.prototype.makeChart=function(){
         });
     }
 };
-
 
 Frequencies.prototype.showParams = function( action ){
     frequencies.setTextByClass({selector:'.whiteList', data:''});
