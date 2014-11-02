@@ -16,6 +16,13 @@ Store.prototype.publish=function(topic, info){
 Store.prototype.getLib=function(){
     return this.lib;
 };
+Store.prototype.getList=function(){
+    var word_list = [];
+    for (var i in this.lib ){
+        word_list.push( i );
+    }
+    return word_list;
+};
 Store.prototype.getter=function(x){
     return this.lib[x];
 };

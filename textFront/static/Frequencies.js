@@ -3,33 +3,37 @@ function Frequencies (){ Helper.apply(this, arguments); }
 Frequencies.prototype = Helper.prototype;
 var frequencies = new Frequencies();
 
-Frequencies.prototype.applyFilters = function(){
+Frequencies.prototype.applyFilters = function( list ){
     var whiteList = [];
     var blackList = [];
     var returnList = [];
-    var lib = store.getLib();
+
     if (frequencies.getTextByClass(".whiteList").length > 1){
          whiteList = frequencies.getTextByClass('.whiteList').replace(/, /g, ',').replace(/\n/g, '').split(',');
     }
     if (frequencies.getTextByClass(".blackList").length > 1){
          blackList = frequencies.getTextByClass('.blackList').replace(/, /g, ',').replace(/\n/g, '').split(',');
     }
-    for (var w in lib){
-        if (lib.hasOwnProperty(w)){
+
+    for (var w in list){
+        if (list.hasOwnProperty(w)){
             var inWhite=true;
             var inBlack=false;
             // see if the list exists, then whether a particular word is on it
-            if (whiteList.length > 0 && whiteList.indexOf(w) === -1) inWhite = false;
-            if (blackList.length > 0 && blackList.indexOf(w) !== -1) inBlack = true;
-            if (inWhite && !inBlack) returnList.push(w);
+            if (whiteList.length > 0 && whiteList.indexOf(list[w]) === -1) inWhite = false;
+            if (blackList.length > 0 && blackList.indexOf(list[w]) !== -1) inBlack = true;
+            if (inWhite && !inBlack) {
+                returnList.push(list[w]);
+            }
         }
     }
     return returnList;
 };
 Frequencies.prototype.formatList= function( list ){
     for (var i in list){
-        i = i + '<br />';
+        list[i] = list[i] + '<br />';
     }
+    return list;
 };
 Frequencies.prototype.blitElem= function( elem ){
     frequencies.hideElem('.params');
@@ -69,8 +73,17 @@ Frequencies.prototype.displayAll = function(){
  * displays list of all singly occuring words
  */
 Frequencies.prototype.displayHapaxes = function(){
-    var hapaxes = frequencies.applyFilters();
-//    hapaxes = frequencies.formatList( hapaxes );
+
+    var lib = store.getLib();
+    var raw_hapaxes = [];
+    for ( var i in lib){
+        if (lib[i] === 1){
+            raw_hapaxes.push(i);
+        }
+    };
+    hapaxes = frequencies.applyFilters( raw_hapaxes );
+    hapaxes = frequencies.formatList( hapaxes );
+console.log( hapaxes );
     frequencies.setTextByClass({selector:'.txtDisplay', data: hapaxes});
     frequencies.blitElem('.display');
 };
@@ -81,17 +94,18 @@ Frequencies.prototype.displayHapaxes = function(){
  */
 Frequencies.prototype.displayLongest= function(){
     var num = frequencies.getTextByClass('.whiteList') || 100;
-    frequencies.hideElem('.params');
-    frequencies.showElem('.display');
-    var lib = store.getLib();
-    var longWords= frequencies.applyFilters();
-    longWords = longWords.sort(function(a, b){ return b.length-a.length; }).slice(0, num);
+    var longWords = store.getList().sort(function(a, b){ return b.length-a.length; }).slice(0, num);
+    longWords = frequencies.formatList( longWords );
     frequencies.setTextByClass({selector:'.txtDisplay',data:longWords});
+    frequencies.blitElem('.display');
 };
 Frequencies.prototype.displayChart=function(){
     store.chunk_freq={};
-    var chartWords = frequencies.applyFilters();
-    frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', chartWords);
+    var words = store.getList();
+
+    var chartWords = frequencies.applyFilters( words );
+console.log( JSON.stringify(chartWords) );
+    frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
 
 };
 Frequencies.prototype.makeChart=function(){
@@ -116,7 +130,6 @@ Frequencies.prototype.makeChart=function(){
 
 
 Frequencies.prototype.showParams = function( action ){
-console.log(action);
     frequencies.setTextByClass({selector:'.whiteList', data:''});
     frequencies.setTextByClass({selector:'.blackList', data:''});
     frequencies.onClickByClass('.jsTaskExecute', action);
@@ -128,7 +141,7 @@ function turnTestsOn(){
     frequencies.onClickByClass('.jsAll-Tokens', frequencies.displayAll);
     frequencies.onClickByClass('.jsHapaxes', frequencies.showParams, frequencies.displayHapaxes);
     frequencies.onClickByClass('.jsLong-Words', frequencies.showParams, frequencies.displayLongest);
-    frequencies.onClickByClass('.jsChart', frequencies.showParams, frequencies.paramChart);
+    frequencies.onClickByClass('.jsChart', frequencies.showParams, frequencies.displayChart);
 }
 
 store.subscribe('LIB_READY', turnTestsOn);
