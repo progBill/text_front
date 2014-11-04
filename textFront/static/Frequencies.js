@@ -83,7 +83,6 @@ Frequencies.prototype.displayHapaxes = function(){
     };
     hapaxes = frequencies.applyFilters( raw_hapaxes );
     hapaxes = frequencies.formatList( hapaxes );
-console.log( hapaxes );
     frequencies.setTextByClass({selector:'.txtDisplay', data: hapaxes});
     frequencies.blitElem('.display');
 };
@@ -93,7 +92,7 @@ console.log( hapaxes );
  * it defaults to 100
  */
 Frequencies.prototype.displayLongest= function(){
-    var num = frequencies.getTextByClass('.len') || 100;
+    var num = frequencies.getTextByClass('.jsLen') || 100;
     var longWords = store.getList().sort(function(a, b){ return b.length-a.length; });
     longWords = frequencies.formatList( longWords );
     frequencies.setTextByClass({selector:'.txtDisplay',data:longWords.slice(0,num)});
@@ -104,13 +103,10 @@ Frequencies.prototype.displayChart=function(){
     var words = store.getList();
 
     var chartWords = frequencies.applyFilters( words );
-console.log( JSON.stringify(chartWords) );
     frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
 
 };
 Frequencies.prototype.makeChart=function(){
-    frequencies.showElem('#chart');
-    frequencies.hideElem('.params');
     var chart1 = new Highcharts.Chart({
         chart: {
             renderTo: 'chart',
@@ -126,6 +122,8 @@ Frequencies.prototype.makeChart=function(){
             name:i, data:store.chunk_freq[i]
         });
     }
+
+    frequencies.blitElem('#chart');
 };
 
 Frequencies.prototype.showParams = function( action ){
