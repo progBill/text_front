@@ -1129,6 +1129,13 @@ a.pure-button-selected {
 .pure-table-horizontal tbody > tr:last-child td {
   border-bottom-width: 0;
 }
+.grid__leftbar {
+  bottom: 0;
+  float: left;
+  position: fixed;
+  top: 0;
+  width: 15%;
+}
 .bdy {
   background-color: #4a729c;
 }
@@ -1173,9 +1180,6 @@ a.pure-button-selected {
 .left-container {
   text-align: center;
 }
-.right-container {
-  float: right;
-}
 .main-contain {
   margin: 10px auto;
   width: 100%;
@@ -1205,14 +1209,4 @@ a.pure-button-selected {
 }
 #chart {
   display: none;
-}
-/**
-A New Style
-**/
-.grid__leftbar {
-  bottom: 0;
-  float: left;
-  position: fixed;
-  top: 0;
-  width: 15%;
 }

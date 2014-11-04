@@ -1,17 +1,6 @@
 @import (less) "pure.css";
-
-@nice-blue: #5B83AD;
-@light-blue: @nice-blue + #111;
-@burnt: #8a3324;
-@txtcolor: #222222;
-@white: #f7f7f7;
-@blue: #095B90;
-@dblue: #07466D;
-@ltblue: #6DBDDE;
-@fadedblue: #11A4FF;
-
-@left-width: 15%;
-@main-left-margin: 16%;
+@import (less) "layout.less";
+@import (reference) "variables.less";
 
 .bdy{
     background-color: @nice-blue - #111;
@@ -65,10 +54,6 @@
     text-align: center;
 }
 
-.right-container{
-    float:right;
-}
-
 .main-contain{ 
     margin: 10px auto;
     width: 100%;
@@ -103,18 +88,6 @@
 
 #chart{
     display: none;
-}
-
-/**
-A New Style
-**/
-
-.grid__leftbar{
-    bottom: 0;
-   float: left;
-    position: fixed;
-    top: 0;
-    width: @left-width;
 }
 
 
