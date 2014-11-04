@@ -20,8 +20,8 @@ Frequencies.prototype.applyFilters = function( list ){
             var inWhite=true;
             var inBlack=false;
             // see if the list exists, then whether a particular word is on it
-            if (whiteList.length > 0 && whiteList.indexOf(list[w]) === -1) inWhite = false;
-            if (blackList.length > 0 && blackList.indexOf(list[w]) !== -1) inBlack = true;
+            if (whiteList.length > 0 && whiteList.indexOf(list[w]) === -1){ inWhite = false; }
+            if (blackList.length > 0 && blackList.indexOf(list[w]) !== -1){ inBlack = true; }
             if (inWhite && !inBlack) {
                 returnList.push(list[w]);
             }
@@ -103,10 +103,12 @@ Frequencies.prototype.displayChart=function(){
     var words = store.getList();
 
     var chartWords = frequencies.applyFilters( words );
+
     frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
 
 };
 Frequencies.prototype.makeChart=function(){
+
     var chart1 = new Highcharts.Chart({
         chart: {
             renderTo: 'chart',
@@ -116,8 +118,8 @@ Frequencies.prototype.makeChart=function(){
         //xAxis: { categories: ['Chunk'] },
         yAxis: { title: { text: 'Count' } },
     });
-
     for ( var i in store.chunk_freq ){
+
         chart1.addSeries({
             name:i, data:store.chunk_freq[i]
         });
