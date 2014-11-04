@@ -1137,32 +1137,46 @@ a.pure-button-selected {
   width: 15%;
 }
 .bdy {
-  background-color: #4a729c;
+  background-color: #5b83ad;
 }
 .brand {
-  height: 50px;
-  width: 200px;
+  text-align: center;
+  width: 100%;
 }
 .brand-logo {
   background-color: #11a4ff;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
+  margin: 10px;
+  width: 90%;
 }
 .fMenu {
   width: 100%;
 }
+.grid__leftbar {
+  background-color: #07466d;
+}
+.text-list {
+  background-color: #c4c4c4;
+  list-style: none;
+}
 .task-menu {
+  background-color: #07466d;
   list-style: none;
   margin: 0;
+  text-align: center;
+  padding: 0;
 }
 .task-menu li {
   background: #f7f7f7;
+  border: 3px solid #07466d;
   height: 2em;
-  width: 100%;
+  width: 95%;
 }
 .task-menu li:hover {
   background-color: #e6e6e6;
+  border: 3px solid #5b83ad;
 }
 .task-menu li a {
   color: #222222;

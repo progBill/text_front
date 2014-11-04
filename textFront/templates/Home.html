@@ -2,11 +2,12 @@
 {% block headtitle %}<title>Welcome</title>{% endblock %}
 {% block content %}
 <div class="grid__leftbar">
-    <ul class="jsBook">{% for text in texts %}
+    <a href="/" class="brand"><img src="static/images/Logo-sm.png" class="brand-logo " /></a>
+    <ul class="jsBook text-list">{% for text in texts %}
         <li><a href="#{{ text.link }}">{{ text.label }}</a></li>{% endfor %}
     </ul>
-    <div class="task-menu">
-        <ul>{% for task in tasks %}
+    <div>
+        <ul class="task-menu">{% for task in tasks %}
             <li><a class="fMenu" href="{{ task.name }}">{{ task.name }}</a></li>{% endfor %}
         </ul>
     </div>
