@@ -1129,64 +1129,72 @@ a.pure-button-selected {
 .pure-table-horizontal tbody > tr:last-child td {
   border-bottom-width: 0;
 }
+.grid__leftbar {
+  bottom: 0;
+  float: left;
+  position: fixed;
+  top: 0;
+  width: 15%;
+}
 .bdy {
-  background-color: #4a729c;
+  background-color: #5b83ad;
 }
 .brand {
-  position: relative;
-  height: 50px;
-  width: 200px;
+  text-align: center;
+  width: 100%;
 }
 .brand-logo {
   background-color: #11a4ff;
-  position: absolute;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  /* future proofing */
+  margin: 10px;
+  width: 90%;
+}
+.fMenu {
+  width: 100%;
+}
+.grid__leftbar {
+  background-color: #07466d;
+}
+.text-list {
+  background-color: #c4c4c4;
+  list-style: none;
+}
+.task-menu {
+  background-color: #07466d;
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  padding: 0;
+}
+.task-menu li {
+  background: #f7f7f7;
+  border: 3px solid #07466d;
+  height: 2em;
+  width: 95%;
+}
+.task-menu li:hover {
+  background-color: #e6e6e6;
+  border: 3px solid #5b83ad;
+}
+.task-menu li a {
+  color: #222222;
+  text-decoration: none;
+}
+.task-menu li a:visited {
+  color: inherit;
 }
 .task-results,
-.display,
+.text,
 .params {
-  display: none;
-}
-.leftbar {
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  letter-spacing: normal;
-  word-spacing: normal;
-  vertical-align: top;
-  text-rendering: auto;
-  width: 16.6667%;
-  *width: 16.6357%;
-}
-.guide-bar {
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  letter-spacing: normal;
-  word-spacing: normal;
-  vertical-align: top;
-  text-rendering: auto;
-  width: 100%;
-  background-color: #6c94be;
-  border-bottom: thin solid black;
   display: none;
 }
 .right-container,
 .left-container {
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  letter-spacing: normal;
-  word-spacing: normal;
-  vertical-align: top;
-  text-rendering: auto;
-  width: 16.6667%;
-  *width: 16.6357%;
   text-align: center;
 }
+<<<<<<< HEAD:textFront/static/main.css
 .main-contain,
 .frequencies {
   height: 85vh;
@@ -1197,41 +1205,24 @@ a.pure-button-selected {
 .frequencies div {
   display: inline-block;
   max-height: 100%;
+=======
+.main-contain {
+  margin: 10px auto;
+  width: 100%;
+>>>>>>> working:textFront/static/less/main.css
 }
 .txtDisplay {
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  letter-spacing: normal;
-  word-spacing: normal;
-  vertical-align: top;
-  text-rendering: auto;
-  width: 58.3333%;
-  *width: 58.3023%;
-  background-color: white;
+  background-color: #8a3324;
   color: #222222;
-  margin: 0 10px;
-  max-height: 85vh;
-  overflow: auto;
+  float: left;
+  margin-left: 16%;
 }
 .params {
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  letter-spacing: normal;
-  word-spacing: normal;
-  vertical-align: top;
-  text-rendering: auto;
-  width: 50%;
-  *width: 49.969%;
   display: none;
-  margin-left: 10px;
-}
-.pure-button {
-  letter-spacing: 0;
+  margin-left: 16%;
 }
 .button-task {
-  color: #fff;
+  color: #222222;
   background: #df7514;
 }
 .shadow {
@@ -1239,7 +1230,16 @@ a.pure-button-selected {
   -webkit-box-shadow: 3px 3px 5px 6px #555;
   box-shadow: 3px 3px 5px 6px #555;
 }
+<<<<<<< HEAD:textFront/static/main.css
 #chart {
   display: none;
   margin-left: 10px;
+=======
+.charts {
+  margin-left: 16%;
+  position: absolute;
+}
+#chart {
+  display: none;
+>>>>>>> working:textFront/static/less/main.css
 }

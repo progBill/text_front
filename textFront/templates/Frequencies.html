@@ -1,25 +1,23 @@
 {% extends "mainnav.html" %}
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
-<div class='main-contain'>
-    <div class="task-menu left-container" >{% for task in tasks %}
-        <div class="pure-menu pure-menu-open leftbar"><a class="fMenu js{{ task.replace(' ','-') }}" href="#{{ task.replace(' ','-') }}">{{ task }}</a></div>{% endfor %}
-    </div>
-    <span class='display'>
-        <div class='txtDisplay'><p>Frequencies are all kinds of important. They help to determine how non-native speakers learn a language, whether a document is 'academic', 'professional' or 'informal'.</p></div>
-    </span>
-    <span class='params'>
-        <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas"></textarea>
-        <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>
-        <a class="pure-button button-task jsTaskExecute">Run Task</a>
-    </span>
-    <span class="charts">
-        <div id="chart" style="width:75%;height:60%" ></div>
-    </span>
-</div>
+<div class="grid__leftbar" >
+    <a href="/" class="brand"><img src="static/images/Logo-sm.png" class="brand-logo " /></a><ul class="task-menu"> {% for task in tasks %}
+    <li><a class="fMenu js{{ task.replace(' ','-') }}" href="#{{ task.replace(' ','-') }}">{{ task }}</a></li>{% endfor %}
+</ul></div>
+<span class='display'>
+     <div class='txtDisplay'><p>Frequencies are all kinds of important. They help to determine how non-native speakers learn a language, whether a document is 'academic', 'professional' or 'informal'.</p></div>
+</span>
+<span class='params'>
+    <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas"></textarea>
+    <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>
+    <label>Length: </label><input type="text" class="jsLen" />
+    <a class="pure-button button-task jsTaskExecute">Run Task</a>
+</span>
+<span class="charts">
+    <div id="chart" style="width:75%;height:60%" ></div>
+</span>
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="/static/{{ inc }}"></script>
 {% endfor %}{% endblock %}
-
-
 

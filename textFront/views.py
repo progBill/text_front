@@ -36,7 +36,7 @@ def get_text(id):
     text_loc = path.join(getcwd(), 'textFront','library', session['text_id'])
     with open(text_loc, 'r') as f:
         text = f.read()
-    return text.replace('\r\n','<br />')
+    return text.replace('\r\n','<br />').replace('\n','<br />')
 
 ###############
 # Frequencies #

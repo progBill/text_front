@@ -10,7 +10,7 @@ Home.prototype.displayText= function(){
     home.setTextByClass({selector: '.txtDisplay', data:store.text }); 
 };
 Home.prototype.setBookClick= function(){
-    var texts = document.querySelector(".leftbar").getElementsByTagName("a");
+    var texts = document.querySelector(".jsBook").getElementsByTagName("a");
     for(var i=0; i<texts.length; i++){
         var title = texts[i].innerHTML;
         texts[i].addEventListener('click', home.getText);

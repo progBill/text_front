@@ -1,21 +1,21 @@
 {% extends "mainnav.html" %}
 {% block headtitle %}<title>Welcome</title>{% endblock %}
 {% block content %}
-<div class="left-container">
-<div class="pure-menu pure-menu-open leftbar">
-    <ul>{% for text in texts %}
+<div class="grid__leftbar">
+    <a href="/" class="brand"><img src="static/images/Logo-sm.png" class="brand-logo " /></a>
+    <ul class="jsBook text-list">{% for text in texts %}
         <li><a href="#{{ text.link }}">{{ text.label }}</a></li>{% endfor %}
     </ul>
-</div>
-</div>
-<div class="txtDisplay"></div>
-<div class="right-container">
-    <div class="pure-menu pure-menu-open task-list">
-        <ul>{% for task in tasks %}
-            <li class="pure-menu-disabled"><a href="{{ task.name }}">{{ task.name }}</a></li>{% endfor %}
+    <div>
+        <ul class="task-menu">{% for task in tasks %}
+            <li><a class="fMenu" href="{{ task.name }}">{{ task.name }}</a></li>{% endfor %}
         </ul>
     </div>
-</div>{% endblock %}
+</div>
+<div class="display">
+    <div class="txtDisplay"></div>
+</div>
+{% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="/static/{{ inc }}"></script>
 {% endfor %}{% endblock %}
 
