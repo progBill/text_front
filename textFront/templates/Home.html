@@ -1,8 +1,8 @@
-{% extends "mainnav.html" %}
+{% extends "base.html" %}
 {% block headtitle %}<title>Welcome</title>{% endblock %}
 {% block content %}
 <div class="grid__leftbar">
-    <a href="/" class="brand"><img src="static/images/Logo-sm.png" class="brand-logo " /></a>
+    <a href="/" class="brand"><img src="{{ url_for('static', filename='images/Logo-sm.png') }}" class="brand-logo " /></a>
     <ul class="jsBook text-list">{% for text in texts %}
         <li><a href="#{{ text.link }}">{{ text.label }}</a></li>{% endfor %}
     </ul>
@@ -16,7 +16,7 @@
     <div class="txtDisplay"></div>
 </div>
 {% endblock %}
-{% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="/static/{{ inc }}"></script>
+{% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename=inc) }}"></script>
 {% endfor %}{% endblock %}
 
 
