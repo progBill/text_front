@@ -27,17 +27,18 @@ def major_page(page_key):
 @app.route('/index')
 @app.route('/Home')
 @app.route('/home')
-@major_page('Home')
-def index():
-    pass
-#    """returns html for the landing page"""
-#    template = '%s.html' % page_key
-#    # create dictionaries for content
-#    available_texts = db.get_all_titles() 
-#    menu_list= [x for x in task_dependencies.keys()]
-#    submenus = [x for x in task_dependencies['Home']['sub-menu']]
-#    foot_incs=[x for x in task_dependencies['Home']['js']]
-#    return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list)
+def index(page_key='Home'):
+    """returns html for the landing page"""
+    template = '%s.html' % page_key
+    # create dictionaries for content
+    available_texts = db.get_all_titles() 
+
+    print available_texts
+
+    menu_list= [x for x in task_dependencies.keys()]
+    submenus = [x for x in task_dependencies['Home']['sub-menu']]
+    foot_incs=[x for x in task_dependencies['Home']['js']]
+    return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list)
 
 # ajax returns a text
 @app.route('/get_idx', methods=['GET','POST'])
@@ -83,11 +84,11 @@ def about():
 #############
 # User Page #
 #############
-@app.route('/Users')
+@app.route('/User')
 def login():
     return render_template('login.html')
 
-@app.route('/Users/<user>')
+@app.route('/User/<user>')
 def user(user):
     session['user'] = user
     return render_template('User.html', user=user, menus=['Home','Frequencies','About']) 
