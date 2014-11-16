@@ -13,7 +13,6 @@ import json
 def major_page(page_key):
     template = '%s.html' % page_key
     def page_func(page_key):
-        top_menus = [x for x in task_dependencies.keys()]
         sub_menus = [x for x in task_dependencies[page_key]['sub-menu']]
         foot_incs = [x for x in task_dependencies[page_key]['js']]
         return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=top_menus, submenus=sub_menus)
@@ -51,9 +50,10 @@ def get_idx():
 @app.route('/Frequencies')
 @app.route('/frequencies')
 def frequencies():
+    menu_list= [x for x in task_dependencies.keys()]
     foot_incs = [x for x in task_dependencies['Frequencies']['js']]
     submenus = task_dependencies['Frequencies']['sub-menu']
-    return render_template('Frequencies.html', foot_includes=foot_incs, menus=['Tasks'], submenus=submenus)
+    return render_template('Frequencies.html', foot_includes=foot_incs, menus=menu_list, tasks=submenus)
 
 @app.route('/get_word_count', methods=['POST'])
 def get_word_count():
@@ -67,7 +67,7 @@ def get_word_freq_in_chunk():
     s= db.get_text_by_title(session['text_id'])
     freq_list={};
     for w in word_list:
-        freq_list[w]=wrappers.get_chunked_word_frequency(s,w, 1600)
+        freq_list[w]=wrappers.get_chunked_word_frequency(s,w, 50) 
     return jsonify(freq_list)
 
 ##############
@@ -89,6 +89,15 @@ def login():
 def user(user):
     session['user'] = user
     return render_template('User.html', user=user, menus=['Home','Frequencies','About']) 
+
+@app.route('/login', methods=['POST'])
+def authenticate():
+    incName = request.form['name']
+    if (db.get_user(incName)):
+        session['user'] = incName
+        return render_template('User.html', user=incName, menus=['Home','User','About'])
+    else:
+        return render_template('User.html', menus=['Home','User'])
 
 ###############
 # Error Pages #

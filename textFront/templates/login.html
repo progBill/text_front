@@ -2,7 +2,14 @@
 {% block headtitle %}<title>Please Login</title>{% endblock %}
 {% block content %}
 
+<span class="txtDisplay">
+    <form class="login" action="login" method="post">
+        <label>Name:</label><input name="name" type="text" />
+        <input type="submit" value="Enter" />
+    </form>
+</span>
+
 {% endblock %}
-{% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename=inc) }}"></script>
+{% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>
 {% endfor %}{% endblock %}
 

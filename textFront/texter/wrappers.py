@@ -12,7 +12,7 @@ def lexical_diversity(s):
     num_tokens = len(get_tokens(s))
     num_unique_tokens = len(set(get_tokens(s)))
     # * 1.0 below to make sure we're playing with floats
-    return num_tokens * 1.0 / num_tokens
+    return num_unique_tokens * 1.0 / num_tokens
 
 def get_freq_dist_dict(s):
     '''Returns a dict with words as keys and appearance count as value'''
@@ -28,11 +28,11 @@ def get_longest_words(s, x=10):
     return long_words[x*-1:]
 
 
-def get_chunked_word_frequency(s,w, chunk_size=300):
+def get_chunked_word_frequency(s,w, num_chunk=50):
     '''takes a text and a word, returns a list of frequencies'''
     token_list = get_tokens(s)
-    num_tokens = len(token_list)
-    freqs = [token_list[i:i+chunk_size].count(w) for i in range(0, len(token_list), chunk_size)]
+    len_chunk = len(token_list)/num_chunk
+    freqs = [token_list[i:i+len_chunk].count(w) for i in range(0, len(token_list), len_chunk)]
 
     return freqs
 

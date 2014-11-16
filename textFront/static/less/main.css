@@ -85,22 +85,9 @@ textarea {
 .left-container {
   text-align: center;
 }
-<<<<<<< HEAD:textFront/static/main.css
-.main-contain,
-.frequencies {
-  height: 85vh;
-  margin: 10px auto;
-  width: 75%;
-}
-.main-contain div,
-.frequencies div {
-  display: inline-block;
-  max-height: 100%;
-=======
 .main-contain {
   margin: 10px auto;
   width: 100%;
->>>>>>> working:textFront/static/less/main.css
 }
 .txtDisplay {
   background-color: #8a3324;
@@ -138,16 +125,10 @@ textarea {
   -webkit-box-shadow: 3px 3px 5px 6px #555;
   box-shadow: 3px 3px 5px 6px #555;
 }
-<<<<<<< HEAD:textFront/static/main.css
-#chart {
-  display: none;
-  margin-left: 10px;
-=======
 .charts {
   margin-left: 16%;
   position: absolute;
 }
 #chart {
   display: none;
->>>>>>> working:textFront/static/less/main.css
 }
