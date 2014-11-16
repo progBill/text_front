@@ -30,6 +30,9 @@
   background-color: #c4c4c4;
   list-style: none;
 }
+.text-list li {
+  border-bottom: thin solid black;
+}
 textarea {
   overflow: auto;
   vertical-align: top;
