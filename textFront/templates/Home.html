@@ -1,17 +1,6 @@
 {% extends "base.html" %}
 {% block headtitle %}<title>Welcome</title>{% endblock %}
 {% block content %}
-<div class="grid__leftbar">
-    <a href="/" class="brand"><img src="{{ url_for('static', filename='images/Logo-sm.png') }}" class="brand-logo " /></a>
-    <ul class="jsBook text-list">{% for text in texts %}
-        <li><a href="#{{ text }}">{{ text }}</a></li>{% endfor %}
-    </ul>
-    <div>
-        <ul class="task-menu">{% for task in tasks %}
-            <li><a class="fMenu" href="{{ task }}">{{ task }}</a></li>{% endfor %}
-        </ul>
-    </div>
-</div>
 <div class="display">
     <div class="txtDisplay"></div>
 </div>

@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
-<div class="grid__leftbar" >
-    <a href="/" class="brand"><img src="{{ url_for('static', filename='images/Logo-sm.png') }}" class="brand-logo " /></a><ul class="task-menu"> {% for task in tasks %}
-    <li><a class="fMenu js{{ task.replace(' ','-') }}" href="#{{ task.replace(' ','-') }}">{{ task }}</a></li>{% endfor %}
-</ul></div>
 <span class='display'>
      <div class='txtDisplay'><p>Frequencies are all kinds of important. They help to determine how non-native speakers learn a language, whether a document is 'academic', 'professional' or 'informal'.</p></div>
 </span>
