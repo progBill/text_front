@@ -32,9 +32,6 @@ def index(page_key='Home'):
     template = '%s.html' % page_key
     # create dictionaries for content
     available_texts = db.get_all_titles() 
-
-    print available_texts
-
     menu_list= [x for x in task_dependencies.keys()]
     submenus = [x for x in task_dependencies['Home']['sub-menu']]
     foot_incs=[x for x in task_dependencies['Home']['js']]
@@ -56,7 +53,7 @@ def get_idx():
 def frequencies():
     foot_incs = [x for x in task_dependencies['Frequencies']['js']]
     submenus = task_dependencies['Frequencies']['sub-menu']
-    return render_template('Frequencies.html', foot_includes=foot_incs, menus=submenus)
+    return render_template('Frequencies.html', foot_includes=foot_incs, menus=['Tasks'], submenus=submenus)
 
 @app.route('/get_word_count', methods=['POST'])
 def get_word_count():

@@ -8,7 +8,7 @@ task_dependencies={
     },
     'Frequencies':{
         'js':['Highcharts-4.0.4/js/highcharts.js','Store.js','Helper.js','Frequencies.js'],
-        'sub-menu':['All Tokens','Hapaxes','Long Words', 'Chart']
+        'sub-menu':['All Tokens','Hapaxes','Long Words', 'Chart'],
     },
     'User':{
         'js':[],
@@ -16,7 +16,7 @@ task_dependencies={
     },
     'About':{
         'js':[],
-        'sub-menu':[''],
+        'sub-menu':[],
     },
 }
 
