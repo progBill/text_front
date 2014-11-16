@@ -1,6 +1,5 @@
 function Home (){ Helper.apply(this, arguments) };
 Home.prototype = Helper.prototype;
-
 var home = new Home();
 
 Home.prototype.getText = function( title ){
@@ -11,7 +10,6 @@ Home.prototype.displayText= function(){
 };
 Home.prototype.setBookClick= function(){
     var texts = document.querySelector(".jsBook").getElementsByTagName("a");
-console.log( texts );
     for(var i=0; i<texts.length; i++){
         var title = texts[i].innerHTML;
         texts[i].addEventListener('click', home.getText);

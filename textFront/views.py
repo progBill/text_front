@@ -9,6 +9,17 @@ from nltk.probability import FreqDist
 from itertools import *
 import json
 
+
+def major_page(page_key):
+    template = '%s.html' % page_key
+    def page_func(page_key):
+        top_menus = [x for x in task_dependencies.keys()]
+        sub_menus = [x for x in task_dependencies[page_key]['sub-menu']]
+        foot_incs = [x for x in task_dependencies[page_key]['js']]
+        return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=top_menus, submenus=sub_menus)
+    return page_func
+
+
 ################
 # Landing Page #
 ################
@@ -17,13 +28,17 @@ import json
 @app.route('/Home')
 @app.route('/home')
 def index(page_key='Home'):
-    '''returns html for the landing page'''
+    """returns html for the landing page"""
     template = '%s.html' % page_key
     # create dictionaries for content
     available_texts = db.get_all_titles() 
-    task_list= ['About','Frequencies'] #[x for x in task_dependencies.keys()]
+
+    print available_texts
+
+    menu_list= [x for x in task_dependencies.keys()]
+    submenus = [x for x in task_dependencies['Home']['sub-menu']]
     foot_incs=[x for x in task_dependencies['Home']['js']]
-    return render_template(template, foot_includes=foot_incs, texts=available_texts, tasks=task_list)
+    return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list)
 
 # ajax returns a text
 @app.route('/get_idx', methods=['GET','POST'])
@@ -40,14 +55,13 @@ def get_idx():
 @app.route('/frequencies')
 def frequencies():
     foot_incs = [x for x in task_dependencies['Frequencies']['js']]
-    subtasks = task_dependencies['Frequencies']['task-types']
-    return render_template('Frequencies.html', foot_includes=foot_incs, tasks=subtasks)
+    submenus = task_dependencies['Frequencies']['sub-menu']
+    return render_template('Frequencies.html', foot_includes=foot_incs, menus=submenus)
 
 @app.route('/get_word_count', methods=['POST'])
 def get_word_count():
     txt = db.get_text_by_title(session['text_id'])
     d = wrappers.get_freq_dist_dict(txt)
-
     return jsonify(d)
 
 @app.route('/get_word_freq_in_chunk', methods=['POST'])
@@ -65,7 +79,19 @@ def get_word_freq_in_chunk():
 @app.route('/About')
 @app.route('/about')
 def about():
-    return render_template('About.html')
+    return render_template('About.html', menus=['Home','Frequencies','About'])
+
+#############
+# User Page #
+#############
+@app.route('/User')
+def login():
+    return render_template('login.html')
+
+@app.route('/User/<user>')
+def user(user):
+    session['user'] = user
+    return render_template('User.html', user=user, menus=['Home','Frequencies','About']) 
 
 ###############
 # Error Pages #

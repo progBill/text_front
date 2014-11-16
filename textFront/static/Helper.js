@@ -60,5 +60,3 @@ Helper.prototype.getJson = function(url, tag, requestArgs){
 
 Helper.prototype.out = function( x ){ console.log(x); };
 
-
-
