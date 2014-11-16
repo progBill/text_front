@@ -1,0 +1,10 @@
+<div class="grid__leftbar" >
+    <a href="/" class="brand"><img src="{{ url_for('static', filename='images/Logo-sm.png') }}" class="brand-logo" /></a>
+    <ul class="jsBook text-list">{% for text in texts %}<li><a href="#">{{ text }}</a></li>{% else %}{% endfor %}</ul>
+    <ul class="task-menu"> {% for menu in menus %}
+        <li><a class="fMenu js{{ menu.replace(' ','-') }}" href="{{ menu.replace(' ','-') }}">{{ menu }}</a></li>{% for submenu in submenus %}
+        <li><a class="submenu hidden js{{ submenu.replace(' ','-') }}" href="#">{{ submenu }}</a></li>{% else %}{% endfor %}{% endfor %}
+    </ul>
+</div>
+
+

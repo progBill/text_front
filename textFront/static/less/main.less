@@ -1,4 +1,4 @@
-@import (less) "pure.css";
+//@import (less) "pure.css";
 @import (less) "layout.less";
 @import (reference) "variables.less";
 
@@ -29,7 +29,25 @@ width:100%;
 .text-list{
     background-color: @white - #333;
     list-style: none;
+
+    li{
+        border-bottom: thin solid black;
+    }
 }
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+button, input, select, textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+}
+html, button, input, select, textarea {
+    font-family: sans-serif;
+}
+
 
 .task-menu{
     background-color: @dblue;
@@ -85,10 +103,33 @@ width:100%;
     margin-left: @main-left-margin; 
 }
 
-.button-task{
-    color: @txtcolor;
-    background: rgb(223, 117, 20);
+.button-task {
+    background: none repeat scroll 0 0 #df7514;
+    color: #222222;
+
+    border: 0 none rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    color: rgba(0, 0, 0, 0.8);
+    font-family: inherit;
+    font-size: 100%;
+    padding: 1em;
+    text-decoration: none;
+
+    -moz-user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: normal;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+
+
+    &:hover{
+        background-color:darken(hsl(29, 84%, 35%), 0%);
+    }
 }
+
+
 .shadow {
   -moz-box-shadow:    3px 3px 5px 6px #555;
   -webkit-box-shadow: 3px 3px 5px 6px #555;

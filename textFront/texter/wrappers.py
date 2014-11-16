@@ -5,7 +5,7 @@ from itertools import *
 
 def get_tokens(s):
     '''Returns a list of word tokens'''
-    return word_tokenize(s.encode('utf-8'))
+    return word_tokenize(s)
 
 def lexical_diversity(s):
     '''Provides a measure of lexical diversity'''
@@ -17,7 +17,7 @@ def lexical_diversity(s):
 def get_freq_dist_dict(s):
     '''Returns a dict with words as keys and appearance count as value'''
     d={}
-    d.update([(x,y) for x,y in FreqDist(get_tokens(s)).iteritems()])
+    d.update([(x,y) for x,y in FreqDist(get_tokens(s.decode('utf-8'))).iteritems()])
     return d
 
 
