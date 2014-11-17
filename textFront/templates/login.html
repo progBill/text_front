@@ -3,10 +3,20 @@
 {% block content %}
 
 <span class="txtDisplay">
+    <div class="login__contain">
     <form class="login" action="login" method="post">
         <label>Name:</label><input name="name" type="text" />
-        <input type="submit" value="Enter" />
+        <input type="submit" value="Login" />
     </form>
+    </div>
+<br /><br />
+    <div class="reg__contain">
+    <form class="reg" action="register" method="post">
+        <label>Username:</label><input name="regUser" type="text" />
+        <label>Email:</label><input name="regEmail" type="email" />
+        <input type="submit" value="Register" />
+    </form>
+    </div>
 </span>
 
 {% endblock %}

@@ -33,6 +33,16 @@
 .text-list li {
   border-bottom: thin solid black;
 }
+.login__contain {
+  display: inline-block;
+  position: relative;
+  background: #ccc;
+}
+.reg__contain > form {
+  display: inline-block;
+  position: relative;
+  background: #ccc;
+}
 textarea {
   overflow: auto;
   vertical-align: top;

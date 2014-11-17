@@ -83,10 +83,13 @@ def about():
 #############
 @app.route('/User')
 def login():
-    return render_template('login.html')
+    if session['user']:
+        return user_page(session['user'])
+    else:
+        return render_template('login.html')
 
 @app.route('/User/<user>')
-def user(user):
+def user_page(user):
     session['user'] = user
     return render_template('User.html', user=user, menus=['Home','Frequencies','About']) 
 
@@ -98,6 +101,17 @@ def authenticate():
         return render_template('User.html', user=incName, menus=['Home','User','About'])
     else:
         return render_template('User.html', menus=['Home','User'])
+
+@app.route('/register', methods=['POST'])
+def register():
+    user={}
+    user['username'] = request.form['regUser']
+    user['email'] = request.form['regEmail']
+    if (db.create_user(user)):
+        return user_page(user['username'])
+    else:
+        return 'oh noes, it went wrong!!'
+
 
 ###############
 # Error Pages #
