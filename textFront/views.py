@@ -83,7 +83,7 @@ def about():
 #############
 @app.route('/User')
 def login():
-    if session['user']:
+    if 'user' in session:
         return user_page(session['user'])
     else:
         return render_template('login.html')
@@ -110,7 +110,7 @@ def register():
     if (db.create_user(user)):
         return user_page(user['username'])
     else:
-        return 'oh noes, it went wrong!!'
+        return login()
 
 
 ###############

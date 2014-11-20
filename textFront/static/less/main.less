@@ -1,17 +1,19 @@
-//@import (less) "pure.css";
-@import (less) "layout.less";
 @import (reference) "variables.less";
+@import (reference) "preboot.less";
 
 .bdy{
-    background-color: @nice-blue;
+    #gradient > .vertical(@nice-blue, lighten(@nice-blue, 10%));
 }
 
 .brand{
-text-align: center;
-width:100%;
+
+    text-align: center;
+    width:100%;
+
 }
+
 .brand-logo{
-    background-color: @fadedblue;
+    #gradient > .vertical(@burnt, @dblue);
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px; 
@@ -22,8 +24,14 @@ width:100%;
 .fMenu{
     width: 100%;
 }
+
 .grid__leftbar{
-    background-color: @dblue;
+    bottom: 0;
+    float: left;
+    position: fixed;
+    top: 0;
+    width: @left-width;
+    #gradient > .vertical(@dblue, @ltblue);
 }
 
 .text-list{
@@ -34,11 +42,13 @@ width:100%;
         border-bottom: thin solid black;
     }
 }
+
 .login__contain{
     display: inline-block;
     position: relative;
     background: #ccc;
 }
+
 .reg__contain > form{
     display: inline-block;
     position: relative;
@@ -58,34 +68,58 @@ html, button, input, select, textarea {
     font-family: sans-serif;
 }
 
+.leftbar__list{
+    list-style: none;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+
+    a{
+        color: @black-70;
+        text-decoration: none;
+    }
+
+}
+
+.nav-menu{
+    background-color: @dblue;
+    list-style: none;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+
+    li{
+        background-color: @white;
+    }
+}
+
 .task-menu{
     background-color: @dblue;
     list-style: none;
     margin: 0;
     text-align: center;
     padding: 0;
-}
 
-.task-menu li{
-    background: @white;
-    border: 3px solid @dblue;
-    height: 2em;
-    width: 95%;
+    li{
+        background: @white;
+        border: 3px solid @dblue;
+        height: 2em;
+        width: 95%;
+        a{
+            color: @black-70;
+            text-decoration: none;
 
-    &:hover{
-        background-color: @white - #111;
-        border: 3px solid @nice-blue;
+            &:visited{
+                color: @txtcolor;
+            }
+        }
+ 
+        &:hover{
+            background-color: @white - #111;
+            border: 3px solid @nice-blue;
+            }
+        }
     }
-}
-
-.task-menu li a{
-    color: @txtcolor;
-    text-decoration: none;
-
-    &:visited{
-        color: inherit;
-    }
-}
 
 .task-results, .text, .params{
     display: none;
@@ -138,20 +172,58 @@ html, button, input, select, textarea {
     }
 }
 
-
-.shadow {
-  -moz-box-shadow:    3px 3px 5px 6px #555;
-  -webkit-box-shadow: 3px 3px 5px 6px #555;
-  box-shadow:         3px 3px 5px 6px #555;
-}
-
 .charts{
-    margin-left: @main-left-margin;
     position: absolute;
 }
 
 #chart{
     display: none;
 }
+
+
+/***************
+    BEMish
+***************/
+
+
+.leftcolumn{
+
+}
+
+.topbar{
+
+}
+
+.main__content{
+
+}
+
+.main__content--display{
+
+    background-color: red;
+
+    .display-text{
+
+    }
+
+    .display-form{
+
+    }
+
+    .display-chart{
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
 
 
