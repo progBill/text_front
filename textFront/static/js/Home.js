@@ -1,4 +1,3 @@
-
 var Home = Object.create(Helper);
 
 Home.getText = function( title ){
@@ -16,8 +15,6 @@ Home.setBookClick= function(){
 };
 
 var home = Object.create( Home );
-
 store.subscribe('TEXT_SET', home.displayText);
 home.setBookClick();
-
 

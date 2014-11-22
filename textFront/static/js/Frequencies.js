@@ -1,18 +1,15 @@
-function Frequencies (){ Helper.apply(this, arguments); }
-// sort-of inheritence
-Frequencies.prototype = Helper.prototype;
-var frequencies = new Frequencies();
+var Frequencies = Object.create(Helper);
 
-Frequencies.prototype.applyFilters = function( list ){
+Frequencies.applyFilters = function( list ){
     var whiteList = [];
     var blackList = [];
     var returnList = [];
 
-    if (frequencies.getTextByClass(".whiteList").length > 1){
-         whiteList = frequencies.getTextByClass('.whiteList').replace(/, /g, ',').replace(/\n/g, '').split(',');
+    if (Frequencies.getTextByClass(".whiteList").length > 1){
+         whiteList = Frequencies.getTextByClass('.whiteList').replace(/, /g, ',').replace(/\n/g, '').split(',');
     }
-    if (frequencies.getTextByClass(".blackList").length > 1){
-         blackList = frequencies.getTextByClass('.blackList').replace(/, /g, ',').replace(/\n/g, '').split(',');
+    if (Frequencies.getTextByClass(".blackList").length > 1){
+         blackList = Frequencies.getTextByClass('.blackList').replace(/, /g, ',').replace(/\n/g, '').split(',');
     }
 
     for (var w in list){
@@ -29,24 +26,24 @@ Frequencies.prototype.applyFilters = function( list ){
     }
     return returnList;
 };
-Frequencies.prototype.formatList= function( list ){
+Frequencies.formatList= function( list ){
     for (var i in list){
         list[i] = list[i] + '<br />';
     }
     return list;
 };
-Frequencies.prototype.blitElem= function( elem ){
-    frequencies.hideElem('.params');
-    frequencies.hideElem('.display');
-    frequencies.hideElem('#chart');
+Frequencies.blitElem= function( elem ){
+    Frequencies.hideElem('.params');
+    Frequencies.hideElem('.display');
+    Frequencies.hideElem('#chart');
 
-    frequencies.showElem( elem );
+    Frequencies.showElem( elem );
 };
 
 /**
  * displays the list of all tokens with their counts in parens
  */
-Frequencies.prototype.displayAll = function(){
+Frequencies.displayAll = function(){
     var allWords = [];
     var lib = store.getLib();
     for (var w in lib){
@@ -65,14 +62,14 @@ Frequencies.prototype.displayAll = function(){
         return bNum - aNum;
      });
 
-    frequencies.setTextByClass({selector: '.txtDisplay', data:allWords });
-    frequencies.blitElem('.display');
+    Frequencies.setTextByClass({selector: '.txtDisplay', data:allWords });
+    Frequencies.blitElem('.display');
 };
 /**
  * HAPAXES
  * displays list of all singly occuring words
  */
-Frequencies.prototype.displayHapaxes = function(){
+Frequencies.displayHapaxes = function(){
 
     var lib = store.getLib();
     var raw_hapaxes = [];
@@ -81,33 +78,33 @@ Frequencies.prototype.displayHapaxes = function(){
             raw_hapaxes.push(i);
         }
     };
-    hapaxes = frequencies.applyFilters( raw_hapaxes );
-    hapaxes = frequencies.formatList( hapaxes );
-    frequencies.setTextByClass({selector:'.txtDisplay', data: hapaxes});
-    frequencies.blitElem('.display');
+    hapaxes = Frequencies.applyFilters( raw_hapaxes );
+    hapaxes = Frequencies.formatList( hapaxes );
+    Frequencies.setTextByClass({selector:'.txtDisplay', data: hapaxes});
+    Frequencies.blitElem('.display');
 };
 
 /**
  * displays the list of longest words in descending length. If the number to display isn't given,
  * it defaults to 100
  */
-Frequencies.prototype.displayLongest= function(){
-    var num = frequencies.getTextByClass('.jsLen') || 100;
+Frequencies.displayLongest= function(){
+    var num = Frequencies.getTextByClass('.jsLen') || 100;
     var longWords = store.getList().sort(function(a, b){ return b.length-a.length; });
-    longWords = frequencies.formatList( longWords );
-    frequencies.setTextByClass({selector:'.txtDisplay',data:longWords.slice(0,num)});
-    frequencies.blitElem('.display');
+    longWords = Frequencies.formatList( longWords );
+    Frequencies.setTextByClass({selector:'.txtDisplay',data:longWords.slice(0,num)});
+    Frequencies.blitElem('.display');
 };
-Frequencies.prototype.displayChart=function(){
+Frequencies.displayChart=function(){
     store.chunk_freq={};
     var words = store.getList();
 
-    var chartWords = frequencies.applyFilters( words );
+    var chartWords = Frequencies.applyFilters( words );
 
-    frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
+    Frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
 
 };
-Frequencies.prototype.makeChart=function(){
+Frequencies.makeChart=function(){
 
     var chart1 = new Highcharts.Chart({
         chart: {
@@ -125,16 +122,17 @@ Frequencies.prototype.makeChart=function(){
         });
     }
 
-    frequencies.blitElem('#chart');
+    Frequencies.blitElem('#chart');
 };
 
-Frequencies.prototype.showParams = function( action ){
-    frequencies.setTextByClass({selector:'.whiteList', data:''});
-    frequencies.setTextByClass({selector:'.blackList', data:''});
-    frequencies.onClickByClass('.jsTaskExecute', action);
-    frequencies.blitElem('.params');
+Frequencies.showParams = function( action ){
+    Frequencies.setTextByClass({selector:'.whiteList', data:''});
+    Frequencies.setTextByClass({selector:'.blackList', data:''});
+    Frequencies.onClickByClass('.jsTaskExecute', action);
+    Frequencies.blitElem('.params');
 };
 
+var frequencies = Object.create( Frequencies );
 /////////  SETUP
 function turnTestsOn(){
     frequencies.onClickByClass('.jsAll-Tokens', frequencies.displayAll);
@@ -147,5 +145,4 @@ store.subscribe('LIB_READY', turnTestsOn);
 store.subscribe('CHUNKS', frequencies.makeChart);
 frequencies.getJson('/get_word_count', 'LIB_READY');
 frequencies.showElem('.display');
-
 
