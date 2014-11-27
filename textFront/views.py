@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from textFront import app
-from flask import render_template, jsonify, request, session
+from flask import render_template, jsonify, request, session, redirect
 from os import path, getcwd
 from page_controller import task_dependencies
 from textFront.texter import wrappers
@@ -9,7 +9,6 @@ from nltk.probability import FreqDist
 from itertools import *
 import json
 
-
 def major_page(page_key):
     template = '%s.html' % page_key
     def page_func(page_key):
@@ -17,7 +16,6 @@ def major_page(page_key):
         foot_incs = [x for x in task_dependencies[page_key]['js']]
         return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=top_menus, submenus=sub_menus)
     return page_func
-
 
 ################
 # Landing Page #
@@ -37,7 +35,7 @@ def index(page_key='Home'):
     return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list)
 
 # ajax returns a text
-@app.route('/get_idx', methods=['GET','POST'])
+@app.route('/get_idx', methods=['POST'])
 def get_idx():
     """Sets text in session, returns body of text"""
     session['text_id'] = request.data 
@@ -88,10 +86,17 @@ def login():
     else:
         return render_template('login.html')
 
+@app.route('/logout', methods=['GET','POST'])
+def logout():
+    session.pop('user', None)
+    return index()
+
 @app.route('/User/<user>')
 def user_page(user):
     session['user'] = user
-    return render_template('User.html', user=user, menus=['Home','Frequencies','About']) 
+    menu_list= [x for x in task_dependencies.keys()]
+    foot_incs= [x for x in task_dependencies['User']['js']]
+    return render_template('User.html', user=user, foot_includes=foot_incs, menus=['Home','Frequencies','About']) 
 
 @app.route('/login', methods=['POST'])
 def authenticate():
@@ -112,6 +117,20 @@ def register():
     else:
         return login()
 
+@app.route('/get_saved_task', methods=['POST'])
+def get_saved_task():
+    user= session['user']
+    save_name= request.form['save_name']
+    db.get_task(user, save_name)
+    return 'OK'
+
+@app.route('/save_task', methods=['POST'])
+def save_task():
+    user= session['user']
+    save_name= request.form['save-name']
+    data= request.form['task-data']
+    db.set_task(user, save_name, data)
+    return 'OK'
 
 ###############
 # Error Pages #

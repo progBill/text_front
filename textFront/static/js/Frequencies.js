@@ -109,7 +109,7 @@ Frequencies.makeChart=function(){
     var chart1 = new Highcharts.Chart({
         chart: {
             renderTo: 'chart',
-            type: 'spline',
+            type: 'line',
         },
         title: { text: 'Frequencies' },
         //xAxis: { categories: ['Chunk'] },

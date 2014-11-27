@@ -3,9 +3,7 @@ Helper= {
         return document.querySelector( x ).value;
     },
     setTextByClass: function(x){
-console.log("setting Text for " + x.selector);
         var elem= document.querySelector( x.selector );
-        elem.style.backgroundColor= '#FFFFFF';
         var content='';
 
         if(typeof(x.data)==='object'){

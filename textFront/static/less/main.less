@@ -2,41 +2,19 @@
 @import (reference) "preboot.less";
 
 .bdy{
-    #gradient > .vertical(@nice-blue, lighten(@nice-blue, 10%));
-}
-
-.brand{
-
-    text-align: center;
-    width:100%;
+//    #gradient > .vertical(@brand-primary, lighten(@brand-secondary, 10%));
+    background: @bg-reading;
 
 }
-
-.brand-logo{
-    #gradient > .vertical(@burnt, @dblue);
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px; 
-    margin: 10px;
-    width: 90%;
-}
-
 .fMenu{
     width: 100%;
-}
-
-.grid__leftbar{
-    bottom: 0;
-    float: left;
-    position: fixed;
-    top: 0;
-    width: @left-width;
-    #gradient > .vertical(@dblue, @ltblue);
 }
 
 .text-list{
     background-color: @white - #333;
     list-style: none;
+    padding: 0;
+    text-align: left;
 
     li{
         border-bottom: thin solid black;
@@ -59,42 +37,18 @@ textarea {
     overflow: auto;
     vertical-align: top;
 }
+
 button, input, select, textarea {
     font-size: 100%;
     margin: 0;
     vertical-align: baseline;
 }
+
 html, button, input, select, textarea {
     font-family: sans-serif;
 }
 
-.leftbar__list{
-    list-style: none;
-    margin: 0;
-    text-align: center;
-    padding: 0;
-
-    a{
-        color: @black-70;
-        text-decoration: none;
-    }
-
-}
-
-.nav-menu{
-    background-color: @dblue;
-    list-style: none;
-    margin: 0;
-    text-align: center;
-    padding: 0;
-
-    li{
-        background-color: @white;
-    }
-}
-
 .task-menu{
-    background-color: @dblue;
     list-style: none;
     margin: 0;
     text-align: center;
@@ -102,21 +56,21 @@ html, button, input, select, textarea {
 
     li{
         background: @white;
-        border: 3px solid @dblue;
         height: 2em;
+        margin: 3px;
         width: 95%;
         a{
             color: @black-70;
             text-decoration: none;
 
             &:visited{
-                color: @txtcolor;
+                color: @txt-reading;
             }
         }
  
         &:hover{
             background-color: @white - #111;
-            border: 3px solid @nice-blue;
+            border: 3px solid @brand-secondary;
             }
         }
     }
@@ -129,33 +83,24 @@ html, button, input, select, textarea {
     text-align: center;
 }
 
-.main-contain{ 
-    margin: 10px auto;
-    width: 100%;
-}
-
-.txtDisplay{
-    background-color: @burnt;
-    color: @txtcolor;
-    float:left;
-    margin-left: @main-left-margin; 
-}
-
-.params{
-    display: none;
-    margin-left: @main-left-margin; 
+.params, .txtDisplay{
+//    background-color: @bg-reading;
+    color: @txt-reading;
+    float: right;
+    width: @main-width;
 }
 
 .button-task {
     background: none repeat scroll 0 0 #df7514;
     color: #222222;
 
+    padding: 1em;
+
     border: 0 none rgba(0, 0, 0, 0);
     border-radius: 2px;
     color: rgba(0, 0, 0, 0.8);
     font-family: inherit;
     font-size: 100%;
-    padding: 1em;
     text-decoration: none;
 
     -moz-user-select: none;
@@ -166,14 +111,14 @@ html, button, input, select, textarea {
     vertical-align: baseline;
     white-space: nowrap;
 
-
     &:hover{
         background-color:darken(hsl(29, 84%, 35%), 0%);
     }
 }
 
 .charts{
-    position: absolute;
+    float: right;
+    width: 80%;
 }
 
 #chart{
@@ -185,44 +130,45 @@ html, button, input, select, textarea {
     BEMish
 ***************/
 
+.grid__leftbar{
+    bottom: 0;
+    float: left;
+    position: fixed;
+    top: 0;
+    width: @left-width;
+    #gradient > .vertical(@brand-primary, @brand-secondary);
+//    background: red;
 
-.leftcolumn{
+}
 
+.brand{
+    text-align: center;
+    width:100%;
+}
+
+.brand-logo{
+    #gradient > .vertical(@brand-accent, @brand-primary);
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; 
+    margin: 5% 0 0 5%;
+    width: 90%;
+}
+
+.nav-menu{
+    background-color: @brand-primary;
+    list-style: none;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+
+    li{
+        background-color: @white;
+    }
 }
 
 .topbar{
-
 }
-
-.main__content{
-
-}
-
-.main__content--display{
-
-    background-color: red;
-
-    .display-text{
-
-    }
-
-    .display-form{
-
-    }
-
-    .display-chart{
-
-    }
-
-
-}
-
-
-
-
-
-
-
 
 
 

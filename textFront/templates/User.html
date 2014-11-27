@@ -5,11 +5,11 @@
     <div class="txtDisplay">
         <span class="user-core">
             <p>Hi, {{ user }}</p>
+            <div class="button-task jsLogout"><a href='logout'>Logout</a></div>
         </span>
         <span class="saved-tasks">
             <h3>Saved Tasks</h3>
             {% for save in savedTasks %}
-
             {% else %}
             <p>No saved tasks, go explore some!</p>
             {% endfor %}
@@ -17,6 +17,6 @@
     </div>
 </div>
 {% endblock %}
-{% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename=inc) }}"></script>
+{% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/' + inc) }}"></script>
 {% endfor %}{% endblock %}
 

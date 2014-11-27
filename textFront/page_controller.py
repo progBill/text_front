@@ -11,7 +11,7 @@ task_dependencies={
         'sub-menu':['All Tokens','Hapaxes','Long Words', 'Chart'],
     },
     'User':{
-        'js':[],
+        'js':['Helper.js','User.js'],
         'sub-menu':[],
     },
     'About':{
