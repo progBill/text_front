@@ -24,6 +24,7 @@ var Store = {
             if(typeof(lib)==="undefined"){ lib={}; }
          this.lib[x]=y;
     },
+    
 };
 
 var store = Object.create(Store);

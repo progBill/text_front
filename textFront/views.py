@@ -121,17 +121,20 @@ def register():
 def get_saved_task():
     user= session['user']
     save_name= request.form['save_name']
-    db.get_task(user, save_name)
-    return 'OK'
+    task = db.get_task(user, save_name)
+    return jsonify({'task':task})
 
 @app.route('/save_task', methods=['POST'])
 def save_task():
     user= session['user']
-    save_name= request.form['save-name']
-    data= request.form['task-data']
-    db.set_task(user, save_name, data)
-    return 'OK'
-
+    data = request.data
+    save_name= "teste"#request.form['save-name']
+#    data= request.form['task-data']
+    print data
+    if db.save_task(user, save_name, data):
+        return jsonify({'save':'OK'})
+    else:
+        return jsonify({'save':'fail'})
 ###############
 # Error Pages #
 ###############

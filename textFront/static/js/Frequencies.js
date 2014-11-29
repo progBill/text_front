@@ -24,6 +24,8 @@ Frequencies.applyFilters = function( list ){
             }
         }
     }
+
+    store.setter('filters',JSON.stringify({'white':whiteList,'black':blackList}));
     return returnList;
 };
 Frequencies.formatList= function( list ){
@@ -62,9 +64,12 @@ Frequencies.displayAll = function(){
         return bNum - aNum;
      });
 
+    store.setter('saver',allWords);
+
     Frequencies.setTextByClass({selector: '.txtDisplay', data:allWords });
     Frequencies.blitElem('.display');
 };
+
 /**
  * HAPAXES
  * displays list of all singly occuring words
@@ -80,6 +85,9 @@ Frequencies.displayHapaxes = function(){
     };
     hapaxes = Frequencies.applyFilters( raw_hapaxes );
     hapaxes = Frequencies.formatList( hapaxes );
+
+    store.setter('saver', hapaxes);
+
     Frequencies.setTextByClass({selector:'.txtDisplay', data: hapaxes});
     Frequencies.blitElem('.display');
 };
@@ -92,6 +100,9 @@ Frequencies.displayLongest= function(){
     var num = Frequencies.getTextByClass('.jsLen') || 100;
     var longWords = store.getList().sort(function(a, b){ return b.length-a.length; });
     longWords = Frequencies.formatList( longWords );
+
+    store.setter('saver', longWords);
+
     Frequencies.setTextByClass({selector:'.txtDisplay',data:longWords.slice(0,num)});
     Frequencies.blitElem('.display');
 };
@@ -100,6 +111,8 @@ Frequencies.displayChart=function(){
     var words = store.getList();
 
     var chartWords = Frequencies.applyFilters( words );
+
+    store.setter('saver', chartWords)
 
     Frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
 
@@ -115,6 +128,7 @@ Frequencies.makeChart=function(){
         //xAxis: { categories: ['Chunk'] },
         yAxis: { title: { text: 'Count' } },
     });
+
     for ( var i in store.chunk_freq ){
 
         chart1.addSeries({
@@ -132,6 +146,10 @@ Frequencies.showParams = function( action ){
     Frequencies.blitElem('.params');
 };
 
+Frequencies.saveTask = function(){
+    Frequencies.getJson('/save_task','SAVE_TASK',JSON.stringify(store.getter('saver')));
+};
+
 var frequencies = Object.create( Frequencies );
 /////////  SETUP
 function turnTestsOn(){
@@ -139,10 +157,13 @@ function turnTestsOn(){
     frequencies.onClickByClass('.jsHapaxes', frequencies.showParams, frequencies.displayHapaxes);
     frequencies.onClickByClass('.jsLong-Words', frequencies.showParams, frequencies.displayLongest);
     frequencies.onClickByClass('.jsChart', frequencies.showParams, frequencies.displayChart);
-}
+    frequencies.onClickByClass('.jsTaskSave', frequencies.saveTask); 
+};
 
 store.subscribe('LIB_READY', turnTestsOn);
 store.subscribe('CHUNKS', frequencies.makeChart);
 frequencies.getJson('/get_word_count', 'LIB_READY');
-frequencies.showElem('.display');
+frequencies.blitElem('.display');
+
+
 

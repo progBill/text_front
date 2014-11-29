@@ -90,14 +90,14 @@ html, button, input, select, textarea {
     width: @main-width;
 }
 
-.button-task {
-    background: none repeat scroll 0 0 #df7514;
-    color: #222222;
-
+.button{
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
     padding: 1em;
 
     border: 0 none rgba(0, 0, 0, 0);
-    border-radius: 2px;
+    border-radius: 5px;
     color: rgba(0, 0, 0, 0.8);
     font-family: inherit;
     font-size: 100%;
@@ -114,6 +114,19 @@ html, button, input, select, textarea {
     &:hover{
         background-color:darken(hsl(29, 84%, 35%), 0%);
     }
+
+}
+
+.button-task {
+    background: none repeat scroll 0 0 #df7514;
+    color: #222222;
+
+}
+
+.button-save{
+    background: none repeat scroll 0 0 @brand-secondary;
+    color: @txt-reading;
+
 }
 
 .charts{
@@ -143,7 +156,6 @@ html, button, input, select, textarea {
 
 .brand{
     text-align: center;
-    width:100%;
 }
 
 .brand-logo{
@@ -152,7 +164,7 @@ html, button, input, select, textarea {
     -webkit-border-radius: 10px;
     border-radius: 10px; 
     margin: 5% 0 0 5%;
-    width: 90%;
+    width: 50%;
 }
 
 .nav-menu{

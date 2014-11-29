@@ -8,10 +8,13 @@
     <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas"></textarea>
     <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>
     <label>Length: </label><input type="text" class="jsLen" />
-    <a class="button-task jsTaskExecute">Run Task</a>
+    <input type="button" class="button button-task jsTaskExecute" value="Run Task" />
 </span>
 <span class="charts">
     <div id="chart" style="width:75%;height:60%" ></div>
+    <form>
+        <input class="button button-save jsTaskSave" href="#" value="Save Task" />
+    </form>
 </span>
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>
