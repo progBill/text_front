@@ -32,7 +32,7 @@ def index(page_key='Home'):
     menu_list= [x for x in task_dependencies.keys()]
     submenus = [x for x in task_dependencies['Home']['sub-menu']]
     foot_incs=[x for x in task_dependencies['Home']['js']]
-    return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list)
+    return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list, tasks=submenus)
 
 # ajax returns a text
 @app.route('/get_idx', methods=['POST'])
@@ -153,5 +153,13 @@ def server_error(e):
 def get_session():
     session['checked_sess'] = True
     return ' '.join(['%s:    %s<br />' % (x, session[x]) for x in session]) 
+
+
+@app.route('/test')
+def t():
+    temp_template = major_page('Home')
+    return temp_template
+
+
 
 

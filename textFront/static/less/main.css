@@ -79,6 +79,7 @@ textarea {
   color: #656586;
   float: right;
   width: 78%;
+  column_fill: auto;
 }
 .button {
   margin: 0;
