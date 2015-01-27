@@ -117,6 +117,7 @@ def register():
     else:
         return login()
 
+
 @app.route('/get_saved_task', methods=['POST'])
 def get_saved_task():
     user= session['user']
@@ -124,13 +125,15 @@ def get_saved_task():
     task = db.get_task(user, save_name)
     return jsonify({'task':task})
 
+
 @app.route('/save_task', methods=['POST'])
 def save_task():
     user= session['user']
-    data = request.data
-    save_name= "teste"#request.form['save-name']
-#    data= request.form['task-data']
-    print data
+
+    data = json.loads(request.data)
+
+    save_name= "tester"
+    print "save data:\n%s" % data
     if db.save_task(user, save_name, data):
         return jsonify({'save':'OK'})
     else:
@@ -153,7 +156,6 @@ def server_error(e):
 def get_session():
     session['checked_sess'] = True
     return ' '.join(['%s:    %s<br />' % (x, session[x]) for x in session]) 
-
 
 @app.route('/test')
 def t():

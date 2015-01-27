@@ -32,7 +32,6 @@ Helper= {
             if ( ajaxRequest.readyState === 4 ){
                 var data= {};
                 JSON.parse(ajaxRequest.responseText, function(k,v){ data[k]= v; });
-                // TODO: this assignment should be in the store
                 switch( url ){
                     case '/get_idx':
                         store.text= data['textbody'];

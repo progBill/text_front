@@ -1,21 +1,30 @@
 {% extends "base.html" %}
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
-<span class='display'>
+<div class='display'>
      <div class='txtDisplay'><p>Frequencies are all kinds of important. They help to determine how non-native speakers learn a language, whether a document is 'academic', 'professional' or 'informal'.</p></div>
-</span>
+</div>
 <span class='params'>
-    <textarea class="whiteList" rows="20" columns="30" placeholder="Enter words to look for seperated by commas"></textarea>
-    <textarea class="blackList" rows="20" columns="30" placeholder="Enter words to exclude seperated by commas"></textarea>
+    <textarea class="whiteList" placeholder="Enter words to look for seperated by commas"></textarea>
+    <textarea class="blackList" placeholder="Enter words to exclude seperated by commas"></textarea>
     <label>Length: </label><input type="text" class="jsLen" />
     <input type="button" class="button button-task jsTaskExecute" value="Run Task" />
 </span>
-<span class="charts">
+<div class="charts">
     <div id="chart" style="width:75%;height:60%" ></div>
     <form>
-        <input class="button button-save jsTaskSave" href="#" value="Save Task" />
+        <div class="overlay">
+            <label>Test Name: </label><input type="text" />
+            <input class="button button-save jsSaveCommit" value="Commit" />
+            <p>This is my modal!</p>
+        </div>
     </form>
-</span>
+    <input class="button button-save jsTaskSave" value="Save Task" />
+</div>
+<div class="overlay">
+    <label>Enter the save name for your test:</label><br />
+    <input type="text" />
+</div>
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>
 {% endfor %}{% endblock %}

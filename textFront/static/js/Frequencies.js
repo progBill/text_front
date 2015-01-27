@@ -101,6 +101,12 @@ Frequencies.displayLongest= function(){
     var longWords = store.getList().sort(function(a, b){ return b.length-a.length; });
     longWords = Frequencies.formatList( longWords );
 
+    savePacket = {
+        test:"displayLongest",
+        data: longWords
+    }
+
+
     store.setter('saver', longWords);
 
     Frequencies.setTextByClass({selector:'.txtDisplay',data:longWords.slice(0,num)});
@@ -112,7 +118,12 @@ Frequencies.displayChart=function(){
 
     var chartWords = Frequencies.applyFilters( words );
 
-    store.setter('saver', chartWords)
+
+    savePacket = {
+        test: "displayChart",
+        data: chartWords
+    };
+    store.setter('saver', savePacket);
 
     Frequencies.getJson('/get_word_freq_in_chunk','CHUNKS', JSON.stringify(chartWords));
 
@@ -125,7 +136,7 @@ Frequencies.makeChart=function(){
             type: 'line',
         },
         title: { text: 'Frequencies' },
-        //xAxis: { categories: ['Chunk'] },
+        xAxis: { categories: ['Chunk'] },
         yAxis: { title: { text: 'Count' } },
     });
 
@@ -164,6 +175,5 @@ store.subscribe('LIB_READY', turnTestsOn);
 store.subscribe('CHUNKS', frequencies.makeChart);
 frequencies.getJson('/get_word_count', 'LIB_READY');
 frequencies.blitElem('.display');
-
 
 
