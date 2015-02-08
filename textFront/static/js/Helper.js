@@ -15,7 +15,7 @@ Helper= {
     },
     showElem: function( cls ){
         var elem= document.querySelector( cls );
-        if (!elem) { document.getElementById( cls )}
+        if (!elem) { document.getElementById( cls ); };
         elem.style.display= 'inline';
     },
     hideElem: function( cls ){
@@ -23,6 +23,7 @@ Helper= {
         elem.style.display= 'none';
     },
     onClickByClass: function(cls, cb, args){
+        console.log(cls);
         document.querySelector( cls ).addEventListener('click', function(){ cb(args) });
     },
     getJson: function(url, tag, requestArgs){

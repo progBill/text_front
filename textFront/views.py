@@ -38,7 +38,7 @@ def index(page_key='Home'):
 @app.route('/get_idx', methods=['POST'])
 def get_idx():
     """Sets text in session, returns body of text"""
-    session['text_id'] = request.data 
+    session['text_id'] = request.data
     text = db.get_text_by_title(session['text_id'])
     return jsonify({"textbody":text})
 
@@ -96,7 +96,7 @@ def user_page(user):
     session['user'] = user
     menu_list= [x for x in task_dependencies.keys()]
     foot_incs= [x for x in task_dependencies['User']['js']]
-    return render_template('User.html', user=user, foot_includes=foot_incs, menus=['Home','Frequencies','About']) 
+    return render_template('User.html', user=user, foot_includes=foot_incs, savedTasks=['one','then another'],menus=['Home','Frequencies','About'])
 
 @app.route('/login', methods=['POST'])
 def authenticate():
@@ -131,7 +131,8 @@ def save_task():
     user= session['user']
 
     data = json.loads(request.data)
-
+    data['text_id'] = session['text_id']
+    
     save_name= "tester"
     print "save data:\n%s" % data
     if db.save_task(user, save_name, data):

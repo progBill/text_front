@@ -8,22 +8,16 @@
     <textarea class="whiteList" placeholder="Enter words to look for seperated by commas"></textarea>
     <textarea class="blackList" placeholder="Enter words to exclude seperated by commas"></textarea>
     <label>Length: </label><input type="text" class="jsLen" />
-    <input type="button" class="button button-task jsTaskExecute" value="Run Task" />
+    <input type="button" class="button button-task jsRunTask" value="Run Task" />
 </span>
+
 <div class="charts">
     <div id="chart" style="width:75%;height:60%" ></div>
-    <form>
         <div class="overlay">
-            <label>Test Name: </label><input type="text" />
+            <label>Test Name: </label><input id="taskName" type="text" /><br />
             <input class="button button-save jsSaveCommit" value="Commit" />
-            <p>This is my modal!</p>
         </div>
-    </form>
     <input class="button button-save jsTaskSave" value="Save Task" />
-</div>
-<div class="overlay">
-    <label>Enter the save name for your test:</label><br />
-    <input type="text" />
 </div>
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>

@@ -3,17 +3,20 @@
 {% block content %}
 <div class="display">
     <div class="txtDisplay">
-        <span class="user-core">
+        <div class="user-core">
             <p>Hi, {{ user }}</p>
             <div class="button-task jsLogout"><a href='logout'>Logout</a></div>
-        </span>
-        <span class="saved-tasks">
+        </div>
+        <div class="saved-tasks">
             <h3>Saved Tasks</h3>
+            <ul>
             {% for save in savedTasks %}
+            <li><a href='/Frequencies/?{{ save }}' >{{ save }}</a></li>
             {% else %}
-            <p>No saved tasks, go explore some!</p>
+            <li>No saved tasks, go explore some!</li>
             {% endfor %}
-        </span>
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}
