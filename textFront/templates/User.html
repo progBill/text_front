@@ -11,7 +11,7 @@
             <h3>Saved Tasks</h3>
             <ul>
             {% for save in savedTasks %}
-            <li><a href='/Frequencies/?{{ save }}' >{{ save }}</a></li>
+            <li><a href='/load_task/{{ save[0] }}' >{{ save[0] }}</a></li>
             {% else %}
             <li>No saved tasks, go explore some!</li>
             {% endfor %}
@@ -22,4 +22,3 @@
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/' + inc) }}"></script>
 {% endfor %}{% endblock %}
-

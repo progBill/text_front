@@ -23,19 +23,19 @@ Helper= {
         elem.style.display= 'none';
     },
     onClickByClass: function(cls, cb, args){
-        console.log(cls);
-        document.querySelector( cls ).addEventListener('click', function(){ cb(args) });
+        document.querySelector( cls ).addEventListener('click', function(){ cb(args) } );
     },
     getJson: function(url, tag, requestArgs){
         var reqArgs= requestArgs || null;
         var ajaxRequest= new XMLHttpRequest();
         ajaxRequest.onreadystatechange= function(){
-            if ( ajaxRequest.readyState === 4 ){
+            if ( ajaxRequest.readyState === 4 ){    
                 var data= {};
                 JSON.parse(ajaxRequest.responseText, function(k,v){ data[k]= v; });
                 switch( url ){
                     case '/get_idx':
                         store.text= data['textbody'];
+                        break;
                     case '/get_word_count':
                         store.lib= data;
                         break;
@@ -45,13 +45,18 @@ Helper= {
                             if ( typeof(store.chunk_freq) ==='undefined' ){ store.chunk_freq={}; }
                             store.chunk_freq[i]=test[i];
                         }
+                        break;
+                    case '/get_saved_task':
+
+                        store.setter('saved_task',data);
+                        break;
                 }
                 store.publish( tag );
             }
-        }
+        };
         ajaxRequest.open( "POST", url, true );
         ajaxRequest.send( reqArgs );
-    },
+    }
 };
 
 

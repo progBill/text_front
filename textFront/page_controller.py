@@ -4,7 +4,7 @@ from os import listdir, path, getcwd
 task_dependencies={
     'Home':{
         'js':['Store.js','Helper.js','Home.js'],
-        'sub-menu':['import'],
+#        'sub-menu':['import'],
     },
     'Frequencies':{
         'js':['Highcharts-4.0.4/js/highcharts.js','Store.js','Helper.js','Frequencies.js'],
@@ -19,5 +19,3 @@ task_dependencies={
         'sub-menu':[],
     },
 }
-
-

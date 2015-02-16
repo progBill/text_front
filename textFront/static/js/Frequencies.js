@@ -92,8 +92,8 @@ Frequencies.displayHapaxes = function () {
         if (lib[i] === 1) {
             raw_hapaxes.push(i);
         }
-    }
-    ;
+    };
+
     hapaxes = Frequencies.applyFilters(raw_hapaxes);
     hapaxes = Frequencies.formatList(hapaxes);
 
@@ -101,7 +101,7 @@ Frequencies.displayHapaxes = function () {
         test: "displayHapaxes",
         data: hapaxes
     },
-            
+
     store.setter('saver',savePacket);
 
     Frequencies.setTextByClass({selector: '.txtDisplay', data: hapaxes});
@@ -132,9 +132,7 @@ Frequencies.displayLongest = function () {
 Frequencies.displayChart = function () {
     store.chunk_freq = {};
     var words = store.getList();
-
     var chartWords = Frequencies.applyFilters(words);
-
 
     savePacket = {
         test: "displayChart",
@@ -143,7 +141,6 @@ Frequencies.displayChart = function () {
     store.setter('saver', savePacket);
 
     Frequencies.getJson('/get_word_freq_in_chunk', 'CHUNKS', JSON.stringify(chartWords));
-
 };
 
 Frequencies.makeChart = function () {
@@ -185,8 +182,34 @@ Frequencies.showSave = function () {
 Frequencies.saveTask = function () {
     console.log("saving");
     var savePacket = store.getter('saver');
-    var testName = document.getElementById('taskName');
-    Frequencies.getJson('/save_task', 'SAVE_TASK', JSON.stringify());
+    savePacket.save_name = document.getElementById('taskName').value;
+    Frequencies.getJson('/save_task', 'SAVE_TASK', JSON.stringify(savePacket));
+};
+
+Frequencies.loadSavedTask = function() {
+    
+    data = store.getter('saved_task')['task'];
+
+    if (data == "False") return; // we've no actual saved tasks
+
+    // all the different languages and json/text transforms makes it
+    // necessary to explicitly reformat the json
+    data = JSON.parse(data.replace(/u'/g,'"').replace(/'/g,'"'));
+    console.log("js data: " + data.data );
+    task_to_run = data.test;
+
+    whiteList = document.getElementsByClassName('whiteList')[0];
+    whiteList.value = data.data;
+
+    switch( task_to_run ){
+    case 'displayChart':
+        dest = Frequencies.displayChart;
+        break;
+    }
+
+    Frequencies.showParams(dest);
+    Frequencies.getJson('/clear_load_task','TASK_CLEARED');
+
 };
 
 var frequencies = Object.create(Frequencies);
@@ -198,10 +221,15 @@ function turnTestsOn() {
     frequencies.onClickByClass('.jsChart', frequencies.showParams, frequencies.displayChart);
     frequencies.onClickByClass('.jsTaskSave', frequencies.showSave);
     frequencies.onClickByClass('.jsSaveCommit', frequencies.saveTask);
+
+    //if we are loading a task, deal with it here
+    frequencies.getJson('/get_saved_task', 'LOADING');
+
 };
 
 store.subscribe('LIB_READY', turnTestsOn);
 store.subscribe('CHUNKS', frequencies.makeChart);
+store.subscribe('LOADING', frequencies.loadSavedTask);
 frequencies.getJson('/get_word_count', 'LIB_READY');
 frequencies.blitElem('.display');
 

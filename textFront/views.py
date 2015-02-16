@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from textFront import app
-from flask import render_template, jsonify, request, session, redirect
-from os import path, getcwd
+from flask import render_template, jsonify, request, session, redirect, url_for
 from page_controller import task_dependencies
 from textFront.texter import wrappers
 from textFront.texter import queries as db
-from nltk.probability import FreqDist
 from itertools import *
+from ast import literal_eval as dicter
 import json
 
 def major_page(page_key):
@@ -30,9 +29,20 @@ def index(page_key='Home'):
     # create dictionaries for content
     available_texts = db.get_all_titles() 
     menu_list= [x for x in task_dependencies.keys()]
-    submenus = [x for x in task_dependencies['Home']['sub-menu']]
     foot_incs=[x for x in task_dependencies['Home']['js']]
-    return render_template(template, foot_includes=foot_incs, texts=available_texts, menus=menu_list, tasks=submenus)
+
+#    if 'sub-menu' in task_dependencies['Home']:
+#        submenus = [x for x in task_dependencies['Home']['sub-menu']]
+#    else:
+#        submenus = False
+#        
+    submenus = [x for x in task_dependencies['Home']['sub-menu']] if 'sub-menu' in task_dependencies['Home'] else False
+        
+    if 'text_id' in session:
+        text_name = session['text_id']
+    else:
+        text_name = "Choose a Text from the main page!"
+    return render_template(template, foot_includes=foot_incs, text_name=text_name, texts=available_texts, menus=menu_list, tasks=submenus)
 
 # ajax returns a text
 @app.route('/get_idx', methods=['POST'])
@@ -51,7 +61,8 @@ def frequencies():
     menu_list= [x for x in task_dependencies.keys()]
     foot_incs = [x for x in task_dependencies['Frequencies']['js']]
     submenus = task_dependencies['Frequencies']['sub-menu']
-    return render_template('Frequencies.html', foot_includes=foot_incs, menus=menu_list, tasks=submenus)
+    text_name = session['text_id']
+    return render_template('Frequencies.html', text_name=text_name, foot_includes=foot_incs, menus=menu_list, tasks=submenus)
 
 @app.route('/get_word_count', methods=['POST'])
 def get_word_count():
@@ -82,13 +93,14 @@ def about():
 @app.route('/User')
 def login():
     if 'user' in session:
-        return user_page(session['user'])
+        return redirect(url_for('user_page', user=session['user']))
     else:
         return render_template('login.html')
 
+@app.route('/User/logout', methods=['GET','POST'])
 @app.route('/logout', methods=['GET','POST'])
 def logout():
-    session.pop('user', None)
+    session.clear()
     return index()
 
 @app.route('/User/<user>')
@@ -96,14 +108,21 @@ def user_page(user):
     session['user'] = user
     menu_list= [x for x in task_dependencies.keys()]
     foot_incs= [x for x in task_dependencies['User']['js']]
-    return render_template('User.html', user=user, foot_includes=foot_incs, savedTasks=['one','then another'],menus=['Home','Frequencies','About'])
+    savedTasks = db.get_all_tasks(user)
+
+    #put the tasks in the session
+    if 'tasks' not in session: session['tasks']= {}
+    for task in savedTasks:
+        session['tasks'][task[0]] = task[1]
+
+    return render_template('User.html', user=user, foot_includes=foot_incs, savedTasks=savedTasks,menus=menu_list)
 
 @app.route('/login', methods=['POST'])
 def authenticate():
     incName = request.form['name']
     if (db.get_user(incName)):
         session['user'] = incName
-        return render_template('User.html', user=incName, menus=['Home','User','About'])
+        return redirect(url_for('user_page', user=incName))
     else:
         return render_template('User.html', menus=['Home','User'])
 
@@ -117,28 +136,42 @@ def register():
     else:
         return login()
 
-
 @app.route('/get_saved_task', methods=['POST'])
 def get_saved_task():
+    if 'load_task' not in session: return jsonify({'task': 'False'})
+
     user= session['user']
-    save_name= request.form['save_name']
+    save_name= session['load_task']['save_name']
     task = db.get_task(user, save_name)
     return jsonify({'task':task})
-
 
 @app.route('/save_task', methods=['POST'])
 def save_task():
     user= session['user']
-
     data = json.loads(request.data)
     data['text_id'] = session['text_id']
-    
-    save_name= "tester"
-    print "save data:\n%s" % data
+    save_name= data['save_name'] #"tester"
     if db.save_task(user, save_name, data):
         return jsonify({'save':'OK'})
     else:
         return jsonify({'save':'fail'})
+
+@app.route('/load_task/<task_name>', methods=['GET','POST'])
+def load_task(task_name):
+    user = session['user']
+    result = dicter(db.get_task(user, task_name))
+
+    session['load_task'] = {} #clear out anything in there
+    session['load_task']['params'] = result['data']
+    session['load_task']['save_name'] = result['save_name']
+    session['text_id'] = result['text_id']
+    return redirect(url_for('frequencies'));
+
+@app.route('/clear_load_task', methods=['POST'])
+def clear_load_task():
+    del session['load_task']
+    return jsonify({"clear":"OK"})
+
 ###############
 # Error Pages #
 ###############
@@ -162,7 +195,5 @@ def get_session():
 def t():
     temp_template = major_page('Home')
     return temp_template
-
-
 
 
