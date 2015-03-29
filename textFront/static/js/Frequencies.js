@@ -205,6 +205,15 @@ Frequencies.loadSavedTask = function() {
     case 'displayChart':
         dest = Frequencies.displayChart;
         break;
+    case 'displayHapaxes':
+        dest = Frequencies.displayHapaxes;
+        break;
+    case 'displayLongest':
+        dest = Frequencies.displayLongest;
+        break;
+    case 'displayAll':
+        dest = Frequencies.displayAll;
+        break;
     }
 
     Frequencies.showParams(dest);
