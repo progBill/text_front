@@ -6,20 +6,64 @@
     background: @bg-reading;
 
 }
-.fMenu{
-    width: 100%;
+
+//
+//  grid stuff
+//
+
+.grid__main-content{
+    padding-left: @leftbar-space;
+}
+.grid__leftbar{
+    bottom: 0;
+    float: left;
+    position: fixed;
+    top: 0;
+    width: @left-width;
+    #gradient > .vertical(@brand-primary, @brand-secondary);
 }
 
-.text-list{
-    background-color: @white - #333;
+.selected-text{
+    font-size: 1.2em;
+    font-weight: 450;
+    padding-left: 10px;
+    color: @white;
+}
+
+.display{
+    float:left;
+    max-width: 50%;
+}
+
+.library-shelf{
+    float:left;
+    margin-right: 3%;
+}
+.library-shelf__label{
+    
+}
+.library-shelf__menu{
+    padding-left:0;
     list-style: none;
-    padding: 0;
     text-align: left;
-
-    li{
-        border-bottom: thin solid black;
-    }
 }
+.library-shelf__menu-item{
+    background-color: @bg-reading;
+
+    border-bottom: thin solid black;
+    
+    &:hover{
+        background-color: @bg-reading - #222;
+    }
+
+}
+.library-shelf__menu-link{
+    color: @txt-reading;
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
 
 .login__contain{
     display: inline-block;
@@ -83,12 +127,18 @@ html, button, input, select, textarea {
     text-align: center;
 }
 
-.params, .txtDisplay{
-//    background-color: @bg-reading;
+.mainColumn{
     color: @txt-reading;
-    float: right;
-    width: @main-width;
-    column_fill: auto;
+    
+}
+
+.params, .txtDisplay{
+    color: @txt-reading;
+    -webkit-columns: 175px 8;
+    -moz-columns: 175px 8;
+    columns: 175px 8;
+    
+    
 }
 
 .button{
@@ -97,13 +147,18 @@ html, button, input, select, textarea {
     vertical-align: baseline;
     padding: 1em;
 
+    display:none;
+    clear: both;
     border: 0 none rgba(0, 0, 0, 0);
     border-radius: 5px;
     color: rgba(0, 0, 0, 0.8);
+    float: left;
     font-family: inherit;
     font-size: 100%;
     text-decoration: none;
 
+    
+    margin-top: 30px;
     -moz-user-select: none;
     cursor: pointer;
     display: inline-block;
@@ -126,12 +181,11 @@ html, button, input, select, textarea {
 
 .button-save{
     background: none repeat scroll 0 0 @brand-secondary;
-    color: @txt-reading;
+    color: white;
 
 }
 
 .charts{
-    float: right;
     width: 80%;
 }
 
@@ -144,16 +198,7 @@ html, button, input, select, textarea {
     BEMish
 ***************/
 
-.grid__leftbar{
-    bottom: 0;
-    float: left;
-    position: fixed;
-    top: 0;
-    width: @left-width;
-    #gradient > .vertical(@brand-primary, @brand-secondary);
-//    background: red;
 
-}
 
 .brand{
     text-align: center;
@@ -165,19 +210,39 @@ html, button, input, select, textarea {
     -webkit-border-radius: 10px;
     border-radius: 10px; 
     margin: 5% 0 0 5%;
-    width: 50%;
+    width: 85%;
 }
 
 .nav-menu{
-    background-color: @brand-primary;
+    background-color: transparent;
     list-style: none;
     margin: 0;
     text-align: center;
     padding: 0;
+}
 
-    li{
-        background-color: @white;
-    }
+.nav-menu__item{
+}
+
+.nav-menu__link{
+
+    display: block;
+    background-color: @menu-color-background;
+    border-color: @menu-border;
+
+    color: @menu-color;
+    font-size: 1.4em;
+    margin: 10px;
+    padding: 10px;
+    text-decoration: none;
+    &:hover{
+        color: @menu-color--hover;
+        background-color: @menu-color-background--hover;
+        border: 3px solid @brand-secondary;
+        }
+}
+.nav-menu__link--active{
+    
 }
 
 .topbar{

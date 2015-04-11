@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% block headtitle %}<title>Welcome</title>{% endblock %}
-{% block content %}
+{% block content %} 
+<h1>Welcome to Textplorer!</h1>
+<div class="library-shelf">
+<h3 class="library-shelf__label">Choose one of these fine texts to explore:</h3>
+<ul class="jsBook library-shelf__menu">{% for text in texts %}<li class="library-shelf__menu-item"><a class="library-shelf__menu-link" href="#">{{ text }}</a></li>{% else %}{% endfor %}</ul>
+</div>
 <div class="display">
-    <div class="txtDisplay"></div>
+    <div class="mainColumn"></div>
 </div>
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>

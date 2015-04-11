@@ -35,6 +35,7 @@ Helper= {
                 switch( url ){
                     case '/get_idx':
                         store.text= data['textbody'];
+                        store.setter("selectedTitle", reqArgs);
                         break;
                     case '/get_word_count':
                         store.lib= data;

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
+<h1>Inspect your text for word-token frequencies.</h1>
 <div class='display'>
      <div class='txtDisplay'><p>Frequencies are all kinds of important. They help to determine how non-native speakers learn a language, whether a document is 'academic', 'professional' or 'informal'.</p></div>
 </div>
@@ -17,8 +18,9 @@
             <label>Test Name: </label><input id="taskName" type="text" /><br />
             <input class="button button-save jsSaveCommit" value="Commit" />
         </div>
-    <input class="button button-save jsTaskSave" value="Save Task" />
-</div>
+</div>    
+<input class="button button-save jsTaskSave" value="Save Task" />
+
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>
 {% endfor %}{% endblock %}

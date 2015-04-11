@@ -1,10 +1,9 @@
 <div class="grid__leftbar" >
     <a href="/" class="brand"><img src="{{ url_for('static', filename='images/Logo-sm.png') }}" class="brand-logo" /></a>
-    <p>Text: {{ text_name }}</p>
+    <p class="selected-text">Selected Text: <span class="jsSelectedText">{{ text_name }}</span></p>
 
-    <ul class="jsBook text-list">{% for text in texts %}<li><a href="#">{{ text }}</a></li>{% else %}{% endfor %}</ul>
     <ul class="nav-menu"> {% for menu in menus %}
-        <li><a class="fMenu js{{ menu.replace(' ','-') }}" href="/{{ menu.replace(' ','-') }}">{{ menu }}</a>
+        <li class="nav-menu__item"><a class="nav-menu__link js{{ menu.replace(' ','-') }}" href="/{{ menu.replace(' ','-') }}">{{ menu }}</a>
     </li>{% endfor %}
     </ul>
         {% if tasks %}<ul class="task-menu">{% for task in tasks %}

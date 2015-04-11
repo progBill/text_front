@@ -168,7 +168,11 @@ Frequencies.makeChart = function () {
 Frequencies.showParams = function (action) {
     Frequencies.setTextByClass({selector: '.whiteList', data: ''});
     Frequencies.setTextByClass({selector: '.blackList', data: ''});
-    Frequencies.onClickByClass('.jsRunTask', action);
+    
+    runBtn = document.getElementsByClassName('.jsRunTask')[0];
+console.log('setting run task');
+    document.removeEventListener('click',runBtn,false);
+    Frequencies.onClickByClass('.jsRunTask', action); 
     Frequencies.blitElem('.params');
 };
 

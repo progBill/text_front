@@ -1,10 +1,11 @@
 var Home = Object.create(Helper);
 
-Home.getText = function( title ){
+Home.getText = function( ){
     home.getJson('/get_idx', 'TEXT_SET', this.innerHTML );
 };
 Home.displayText= function(){
-    home.setTextByClass({selector: '.txtDisplay', data:store.text }); 
+    home.setTextByClass({selector: '.jsSelectedText', data:store.getter('selectedTitle')});
+    home.setTextByClass({selector: '.mainColumn', data:store.text }); 
 };
 Home.setBookClick= function(){
     var texts = document.querySelector(".jsBook").getElementsByTagName("a");
