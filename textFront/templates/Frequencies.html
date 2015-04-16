@@ -2,8 +2,8 @@
 {% block headtitle %}<title>Frequencies</title>{% endblock %}
 {% block content %}
 <h1>Inspect your text for word-token frequencies.</h1>
-<div class='display'>
-     <div class='txtDisplay'><p>Frequencies are all kinds of important. They help to determine how non-native speakers learn a language, whether a document is 'academic', 'professional' or 'informal'.</p></div>
+<div class='display freq'>
+     <div class='txtDisplay'></div>
 </div>
 <span class='params'>
     <textarea class="whiteList" placeholder="Enter words to look for seperated by commas"></textarea>
@@ -24,4 +24,3 @@
 {% endblock %}
 {% block scripts %}{% for inc in foot_includes %}<script type="text/javascript" src="{{ url_for('static', filename='js/'+inc) }}"></script>
 {% endfor %}{% endblock %}
-

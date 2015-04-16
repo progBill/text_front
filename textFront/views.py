@@ -30,12 +30,7 @@ def index(page_key='Home'):
     available_texts = db.get_all_titles() 
     menu_list= [x for x in task_dependencies.keys()]
     foot_incs=[x for x in task_dependencies['Home']['js']]
-
-#    if 'sub-menu' in task_dependencies['Home']:
-#        submenus = [x for x in task_dependencies['Home']['sub-menu']]
-#    else:
-#        submenus = False
-#        
+ 
     submenus = [x for x in task_dependencies['Home']['sub-menu']] if 'sub-menu' in task_dependencies['Home'] else False
         
     if 'text_id' in session:
@@ -85,7 +80,7 @@ def get_word_freq_in_chunk():
 @app.route('/About')
 @app.route('/about')
 def about():
-    return render_template('About.html', menus=['Home','Frequencies','About'])
+    return render_template('About.html', menus=task_dependencies['About']['menu'])
 
 #############
 # User Page #

@@ -16,13 +16,18 @@ Helper= {
     showElem: function( cls ){
         var elem= document.querySelector( cls );
         if (!elem) { document.getElementById( cls ); };
-        elem.style.display= 'inline';
+        elem.style.display= 'inline-block';
     },
     hideElem: function( cls ){
         var elem= document.querySelector( cls );
         elem.style.display= 'none';
     },
     onClickByClass: function(cls, cb, args){
+        targetElem = document.querySelector( cls );
+        newElem = targetElem.cloneNode(true);
+        targetElem.parentNode.replaceChild(newElem, targetElem);
+        
+        
         document.querySelector( cls ).addEventListener('click', function(){ cb(args) } );
     },
     getJson: function(url, tag, requestArgs){

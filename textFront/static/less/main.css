@@ -2,14 +2,19 @@
   background: #eeeeee;
 }
 .grid__main-content {
-  padding-left: 14%;
+  padding-left: 20%;
+}
+@media (min-width: 1200px) {
+  .grid__main-content {
+    padding-left: 14%;
+  }
 }
 .grid__leftbar {
   bottom: 0;
   float: left;
   position: fixed;
   top: 0;
-  width: 12%;
+  width: 18%;
   background-color: #07466d;
   background-image: -moz-linear-gradient(top, #428bca, #07466d);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#428bca), to(#07466d));
@@ -18,6 +23,11 @@
   background-image: linear-gradient(to bottom, #428bca, #07466d);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff07466d', GradientType=0);
+}
+@media (min-width: 1200px) {
+  .grid__leftbar {
+    width: 12%;
+  }
 }
 .selected-text {
   font-size: 1.2em;
@@ -115,12 +125,17 @@ textarea {
 .mainColumn {
   color: #656586;
 }
-.params,
-.txtDisplay {
+.freq > .txtDisplay {
   color: #656586;
   -webkit-columns: 175px 8;
   -moz-columns: 175px 8;
   columns: 175px 8;
+}
+.freq > .txtDisplay > .intro {
+  color: #656586;
+  -webkit-columns: 750px 1;
+  -moz-columns: 750px 1;
+  columns: 750px 1;
 }
 .button {
   margin: 0;
@@ -153,6 +168,7 @@ textarea {
 .button-save {
   background: none repeat scroll 0 0 #07466d;
   color: white;
+  display: none;
 }
 .charts {
   width: 80%;

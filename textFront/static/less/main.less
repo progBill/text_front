@@ -12,8 +12,13 @@
 //
 
 .grid__main-content{
-    padding-left: @leftbar-space;
+    padding-left: @left-width + 2%;
+    
+    @media @medium{
+        padding-left: @left-width-md + 2%;
+    }
 }
+
 .grid__leftbar{
     bottom: 0;
     float: left;
@@ -21,6 +26,11 @@
     top: 0;
     width: @left-width;
     #gradient > .vertical(@brand-primary, @brand-secondary);
+    
+    @media @medium{
+        width: @left-width-md ;
+    }
+    
 }
 
 .selected-text{
@@ -132,15 +142,23 @@ html, button, input, select, textarea {
     
 }
 
-.params, .txtDisplay{
-    color: @txt-reading;
-    -webkit-columns: 175px 8;
-    -moz-columns: 175px 8;
-    columns: 175px 8;
-    
-    
-}
+.freq {
+    & > .txtDisplay{
+        color: @txt-reading;
+        -webkit-columns: 175px 8;
+        -moz-columns: 175px 8;
+        columns: 175px 8;
+    }
 
+    & > .txtDisplay > .intro {
+        color: @txt-reading;
+        -webkit-columns: 750px 1;
+        -moz-columns: 750px 1;
+        columns: 750px 1;
+    }
+
+
+}
 .button{
     font-size: 100%;
     margin: 0;
@@ -182,6 +200,7 @@ html, button, input, select, textarea {
 .button-save{
     background: none repeat scroll 0 0 @brand-secondary;
     color: white;
+    display: none;
 
 }
 

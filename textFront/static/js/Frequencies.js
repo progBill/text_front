@@ -99,11 +99,12 @@ Frequencies.displayHapaxes = function () {
 
     savePacket = {
         test: "displayHapaxes",
-        data: hapaxes
+        data: []//hapaxes
     },
 
     store.setter('saver',savePacket);
 
+    Frequencies.showElem(".jsTaskSave");
     Frequencies.setTextByClass({selector: '.txtDisplay', data: hapaxes});
     Frequencies.blitElem('.display');
 };
@@ -121,10 +122,11 @@ Frequencies.displayLongest = function () {
 
     savePacket = {
         test: "displayLongest",
-        data: longWords
-    },
+        data: ""// longWords
+    };
     store.setter('saver', savePacket);
 
+    Frequencies.showElem(".jsTaskSave");
     Frequencies.setTextByClass({selector: '.txtDisplay', data: longWords.slice(0, num)});
     Frequencies.blitElem('.display');
 };
@@ -140,6 +142,7 @@ Frequencies.displayChart = function () {
     };
     store.setter('saver', savePacket);
 
+    Frequencies.showElem(".jsTaskSave");
     Frequencies.getJson('/get_word_freq_in_chunk', 'CHUNKS', JSON.stringify(chartWords));
 };
 
@@ -166,20 +169,20 @@ Frequencies.makeChart = function () {
 };
 
 Frequencies.showParams = function (action) {
+    Frequencies.hideElem(".overlay");
+    Frequencies.hideElem(".jsTaskSave");
     Frequencies.setTextByClass({selector: '.whiteList', data: ''});
     Frequencies.setTextByClass({selector: '.blackList', data: ''});
-    
-    runBtn = document.getElementsByClassName('.jsRunTask')[0];
-console.log('setting run task');
-    document.removeEventListener('click',runBtn,false);
     Frequencies.onClickByClass('.jsRunTask', action); 
     Frequencies.blitElem('.params');
 };
 
 Frequencies.showSave = function () {
+console.log("showsave");
     var showMe = document.getElementsByClassName('overlay')[0];
+    Frequencies.showElem(".jsSaveCommit");
     var hideMe = document.getElementsByClassName('jsTaskSave')[0];
-    showMe.style.display="inline";
+    showMe.style.display="inline-block";
     hideMe.style.display="none";
 };
 
@@ -188,6 +191,7 @@ Frequencies.saveTask = function () {
     var savePacket = store.getter('saver');
     savePacket.save_name = document.getElementById('taskName').value;
     Frequencies.getJson('/save_task', 'SAVE_TASK', JSON.stringify(savePacket));
+    Frequencies.hideElem(".overlay");
 };
 
 Frequencies.loadSavedTask = function() {
